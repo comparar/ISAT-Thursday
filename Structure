@@ -1,0 +1,13 @@
+structure <- function(){
+	greeting <- "Good Morning ISAT"
+
+	vector <- c("a","b","c","d")
+
+	frame <- data.frame(ISAT=c(11,12,15),Programming=c("A","B","C"))
+	new_frame <- frame^power
+
+	listA <- list(1,2,vector,frame,3)
+	new_listA <- c(list,6,7)
+
+	return(list(greeting,vector,new_frame,new_listA))
+}
