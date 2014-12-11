@@ -1,0 +1,89 @@
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> people <- c("justin","olivia","zach","chance")
+> is.vector(people)
+[1] TRUE
+> length(people)
+[1] 4
+> for (individuals in people) {
++ print(individuals)
++ }
+[1] "justin"
+[1] "olivia"
+[1] "zach"
+[1] "chance"
+> for (individuals in people) {
++ writeLines(paste("Hello", individuals),con=stdout(),sep="\n")
++ }
+Hello justin
+Hello olivia
+Hello zach
+Hello chance
+> for (i in 1:4) { print(people[i]) }
+[1] "justin"
+[1] "olivia"
+[1] "zach"
+[1] "chance"
+> for (i in 1:4) {
++ print(people[i])
++ stop("Error!")
++ }
+[1] "justin"
+Error: Error!
+> for (i in 1:4) {
++ print(people[i])
++ stop(paste("Stop",people[i],"!"))
++ }
+[1] "justin"
+Error: Stop justin !
+> length(people)
+[1] 4
+> for (i in 1:length(people)) (print(people[i]) }
+Error: unexpected '}' in "for (i in 1:length(people)) (print(people[i]) }"
+> for (i in 1:length(people)) (print(people[i]) 
++ length(people)
+Error: unexpected symbol in:
+"for (i in 1:length(people)) (print(people[i]) 
+length"
+> for (i in 1:length(people)) { print(people[i]) }
+[1] "justin"
+[1] "olivia"
+[1] "zach"
+[1] "chance"
+> for (i in 1:(length(people)-1)) { print(people[i]) }
+[1] "justin"
+[1] "olivia"
+[1] "zach"
+> if(class=="ISAT 252") { print("You are in the right class!") }
+Error in class == "ISAT 252" : 
+  comparison (1) is possible only for atomic and list types
+> class <- "ISAT 252"
+> if(class=="ISAT 252") { print("You are in the right class!") }
+[1] "You are in the right class!"
+> class <- "GGEOL 211"
+> if(class=="ISAT 252") { 
++ print("You are in the right class!")
++ } else {
++ print("WRONG ROOM")
++ }
+[1] "WRONG ROOM"
+> 

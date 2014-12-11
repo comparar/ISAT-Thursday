@@ -1,0 +1,333 @@
+install.packages("devtools")
+library(devtools)
+install_github("geoffjentry/twitteR")
+library(twitteR)
+api_secret <- "............."
+api_key <- ".............."
+access_token <- "..............."
+access_token_secret <- "............."
+setup_token_oauth(api_key,api_secret,access_token,access_token_secret)
+
+
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> load("C:\\Users\\compa_000\\SkyDrive\\Documents\\2014-2015\\Fall 2014\\ISAT 252\\12.2.2014.RData")
+> 
+> load
+function (file, envir = parent.frame(), verbose = FALSE) 
+{
+    if (is.character(file)) {
+        con <- gzfile(file)
+        on.exit(close(con))
+        magic <- readChar(con, 5L, useBytes = TRUE)
+        if (!length(magic)) 
+            stop("empty (zero-byte) input file")
+        if (!grepl("RD[AX]2\n", magic)) {
+            if (grepl("RD[ABX][12]\r", magic)) 
+                stop("input has been corrupted, with LF replaced by CR")
+            warning(sprintf("file %s has magic number '%s'\n", 
+                sQuote(basename(file)), gsub("[\n\r]*", "", magic)), 
+                "  ", "Use of save versions prior to 2 is deprecated", 
+                domain = NA, call. = FALSE)
+            return(.Internal(load(file, envir)))
+        }
+    }
+    else if (inherits(file, "connection")) {
+        con <- if (inherits(file, "gzfile") || inherits(file, 
+            "gzcon")) 
+            file
+        else gzcon(file)
+    }
+    else stop("bad 'file' argument")
+    if (verbose) 
+        cat("Loading objects:\n")
+    .Internal(loadFromConn2(con, envir, verbose))
+}
+<bytecode: 0x000000000811f458>
+<environment: namespace:base>
+> me <- getUsers("me",token=token)
+Error: could not find function "getUsers"
+> install.packages("Rfacebook","Rook","grid","scales",
++ "ggplot2")
+Warning in install.packages("Rfacebook", "Rook", "grid", "scales", "ggplot2") :
+  'lib = "Rook"' is not writable
+Warning: unable to access index for repository scales
+Warning message:
+package ‘Rfacebook’ is not available (for R version 3.1.1) 
+> library(Rfacebook)
+Loading required package: httr
+Loading required package: rjson
+Warning message:
+package ‘Rfacebook’ was built under R version 3.1.2 
+> library(Rook)
+Error in library(Rook) : there is no package called ‘Rook’
+> library(grid)
+> library(scales)
+> library(ggplot2)
+> token <- "CAACEdEose0cBAHgFZAwdXp9pt7BkhdWLiBpfNsqE3LlS8uE8nojS1ZAfJQ8kAJnWiRzBLaxfZCWa7fzKAiTIkyZAHHlbjJ88CauIIXpY4SyS36gLPWySwPTLtiRicLxzGapxiZAxOAeqccOjDj9ZCovZC1205wrDGZBTjzVWbV8LAKdryul5ZA6g4BS3TpxoAmmH79zHF7IKlsIZBCGmdrAJSkGsZAmZBT3moZB8ZD"
+> me <- getUsers("me",token=token)
+Error in callAPI(query, token) : 
+  (#12) username is deprecated for versions v2.0 and higher
+> getFriends(token,simplify=FALSE)
+                  id              name username first_name  last_name gender
+1  10153205272803625 Sherrill Callahan       NA   Sherrill   Callahan female
+2         1107165057      Benton Hardy       NA     Benton      Hardy   male
+3  10204878904590746  Olivia Parkhurst       NA     Olivia  Parkhurst female
+4         1514626488        Henry Zhou       NA      Henry       Zhou   male
+5  10205089843476544   Rachel Kronlein       NA     Rachel   Kronlein female
+6         1645481592         Lia Verdi       NA        Lia      Verdi female
+7    974850479196310      Jimmy Bowles       NA      Jimmy     Bowles   male
+8    100000422328432 Justin Richardson       NA     Justin Richardson   male
+9    100000572738234          Dana Lee       NA       Dana        Lee female
+10   918604118168823      Jake Merhige       NA       Jake    Merhige   male
+11   841442472555710 Alexandra Freeman       NA  Alexandra    Freeman female
+   locale category likes
+1   en_US       NA    NA
+2   en_US       NA    NA
+3   en_US       NA    NA
+4   en_US       NA    NA
+5   en_US       NA    NA
+6   en_US       NA    NA
+7   en_US       NA    NA
+8   en_US       NA    NA
+9   en_US       NA    NA
+10  en_US       NA    NA
+11  en_US       NA    NA
+                                                                                                                                                                                                                            picture
+1  https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/p200x200/10653637_10153173021693625_1999045707312666253_n.jpg?oh=60cd29b778c1f085a5c01f2c288c389c&oe=551EB3D3&__gda__=1426594882_9699cfac96989fcf0bf6998987f0219b
+2   https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfa1/v/t1.0-1/p200x200/1796682_10204275498663426_5395761304759585620_n.jpg?oh=ac00d43e949739b26b1f7d8a71b7d921&oe=551CFAB1&__gda__=1427987453_8cb3677341773973b490c0ea6f1ea212
+3   https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/p200x200/1560704_10203978668125397_7682697289918612822_n.jpg?oh=969fb12706a07560dae4fbd9521aa7a5&oe=551202BE&__gda__=1426641340_14e03219b0416c6a17f616d0dfd4568e
+4  https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/s200x200/10154017_10203727120527897_4555129116439368200_n.jpg?oh=127c870d736c8f5a6da1ea58eadc179d&oe=55083394&__gda__=1427952108_d86ff5f818e088ce1c969b5d640ba564
+5  https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfa1/v/t1.0-1/p200x200/10801699_10205266496812767_6049933333258277937_n.jpg?oh=471272f829df466c440a4bd45a2f3fbc&oe=550528D2&__gda__=1426093282_e18d9ec69a28fcae0c5386025291f940
+6  https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/v/t1.0-1/p200x200/10686780_10202443306357707_2184180955507550105_n.jpg?oh=e397730b46b68f4fcd1e753f577ba0c8&oe=551EC6BD&__gda__=1427626088_12df2285382192a0a3794d4b9857e548
+7     https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/s200x200/1509795_985145124833512_1043611368783333071_n.jpg?oh=68d3e23ac539431a0c703fbe6390b3fd&oe=55120892&__gda__=1426115359_abaad5c59aa9c03cba2daa22adf55a03
+8    https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/p200x200/10410398_847679048589498_5602748032132096848_n.jpg?oh=1efdc0f7e5fe596918bb876170f5c6da&oe=5500B513&__gda__=1426119087_860ae19565b099d807f8c74411f1378b
+9    https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/v/t1.0-1/p200x200/10801534_941229279239488_1705076246423514165_n.jpg?oh=014bfce5952cc8bf122fb05f71dc34da&oe=551848EA&__gda__=1428009199_40ac3363d0cf43871dc68f8fa7342219
+10   https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/p200x200/10599166_878154128880489_1872839295615995284_n.jpg?oh=f9ab86d422b2f24f3fcafcd34db0b956&oe=54FC0FBC&__gda__=1426835457_0722963a35590d89fbbd791cd4e7099f
+11   https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfp1/v/t1.0-1/p200x200/10252063_821954027837888_2748607435398925433_n.jpg?oh=6a8154a0e2e36c7028fc50f5e667924a&oe=55014BB5&__gda__=1427954654_ff8286db4e157e37fc7baeb6493aa548
+     birthday                 location               hometown
+1       12/25                     <NA>                   <NA>
+2  10/05/1994       Leesburg, Virginia   Apex, North Carolina
+3        <NA>   Harrisonburg, Virginia                   <NA>
+4       10/31     Chesapeake, Virginia                   <NA>
+5  09/10/1994                     <NA>     Manassas, Virginia
+6       01/13                     <NA>                   <NA>
+7       05/03 Fredericksburg, Virginia     Stafford, Virginia
+8  07/25/1994   Harrisonburg, Virginia   Woodbridge, Virginia
+9        <NA> Fredericksburg, Virginia Falls Church, Virginia
+10      03/17      Hauppauge, New York    Hauppauge, New York
+11      06/01   Williamsburg, Virginia Williamsburg, Virginia
+   relationship_status
+1    In a relationship
+2    In a relationship
+3                 <NA>
+4                 <NA>
+5               Single
+6               Single
+7               Single
+8                 <NA>
+9               Single
+10             Married
+11                <NA>
+> my_friends <- getFriends(token, simplify=FALSE)
+> head(my_friends,n=10)
+                  id              name username first_name  last_name gender
+1  10153205272803625 Sherrill Callahan       NA   Sherrill   Callahan female
+2         1107165057      Benton Hardy       NA     Benton      Hardy   male
+3  10204878904590746  Olivia Parkhurst       NA     Olivia  Parkhurst female
+4         1514626488        Henry Zhou       NA      Henry       Zhou   male
+5  10205089843476544   Rachel Kronlein       NA     Rachel   Kronlein female
+6         1645481592         Lia Verdi       NA        Lia      Verdi female
+7    974850479196310      Jimmy Bowles       NA      Jimmy     Bowles   male
+8    100000422328432 Justin Richardson       NA     Justin Richardson   male
+9    100000572738234          Dana Lee       NA       Dana        Lee female
+10   918604118168823      Jake Merhige       NA       Jake    Merhige   male
+   locale category likes
+1   en_US       NA    NA
+2   en_US       NA    NA
+3   en_US       NA    NA
+4   en_US       NA    NA
+5   en_US       NA    NA
+6   en_US       NA    NA
+7   en_US       NA    NA
+8   en_US       NA    NA
+9   en_US       NA    NA
+10  en_US       NA    NA
+                                                                                                                                                                                                                            picture
+1  https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/p200x200/10653637_10153173021693625_1999045707312666253_n.jpg?oh=60cd29b778c1f085a5c01f2c288c389c&oe=551EB3D3&__gda__=1426594882_9699cfac96989fcf0bf6998987f0219b
+2   https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfa1/v/t1.0-1/p200x200/1796682_10204275498663426_5395761304759585620_n.jpg?oh=ac00d43e949739b26b1f7d8a71b7d921&oe=551CFAB1&__gda__=1427987453_8cb3677341773973b490c0ea6f1ea212
+3   https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/p200x200/1560704_10203978668125397_7682697289918612822_n.jpg?oh=969fb12706a07560dae4fbd9521aa7a5&oe=551202BE&__gda__=1426641340_14e03219b0416c6a17f616d0dfd4568e
+4  https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/s200x200/10154017_10203727120527897_4555129116439368200_n.jpg?oh=127c870d736c8f5a6da1ea58eadc179d&oe=55083394&__gda__=1427952108_d86ff5f818e088ce1c969b5d640ba564
+5  https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfa1/v/t1.0-1/p200x200/10801699_10205266496812767_6049933333258277937_n.jpg?oh=471272f829df466c440a4bd45a2f3fbc&oe=550528D2&__gda__=1426093282_e18d9ec69a28fcae0c5386025291f940
+6  https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/v/t1.0-1/p200x200/10686780_10202443306357707_2184180955507550105_n.jpg?oh=e397730b46b68f4fcd1e753f577ba0c8&oe=551EC6BD&__gda__=1427626088_12df2285382192a0a3794d4b9857e548
+7     https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/s200x200/1509795_985145124833512_1043611368783333071_n.jpg?oh=68d3e23ac539431a0c703fbe6390b3fd&oe=55120892&__gda__=1426115359_abaad5c59aa9c03cba2daa22adf55a03
+8    https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/p200x200/10410398_847679048589498_5602748032132096848_n.jpg?oh=1efdc0f7e5fe596918bb876170f5c6da&oe=5500B513&__gda__=1426119087_860ae19565b099d807f8c74411f1378b
+9    https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/v/t1.0-1/p200x200/10801534_941229279239488_1705076246423514165_n.jpg?oh=014bfce5952cc8bf122fb05f71dc34da&oe=551848EA&__gda__=1428009199_40ac3363d0cf43871dc68f8fa7342219
+10   https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/p200x200/10599166_878154128880489_1872839295615995284_n.jpg?oh=f9ab86d422b2f24f3fcafcd34db0b956&oe=54FC0FBC&__gda__=1426835457_0722963a35590d89fbbd791cd4e7099f
+     birthday                 location               hometown
+1       12/25                     <NA>                   <NA>
+2  10/05/1994       Leesburg, Virginia   Apex, North Carolina
+3        <NA>   Harrisonburg, Virginia                   <NA>
+4       10/31     Chesapeake, Virginia                   <NA>
+5  09/10/1994                     <NA>     Manassas, Virginia
+6       01/13                     <NA>                   <NA>
+7       05/03 Fredericksburg, Virginia     Stafford, Virginia
+8  07/25/1994   Harrisonburg, Virginia   Woodbridge, Virginia
+9        <NA> Fredericksburg, Virginia Falls Church, Virginia
+10      03/17      Hauppauge, New York    Hauppauge, New York
+   relationship_status
+1    In a relationship
+2    In a relationship
+3                 <NA>
+4                 <NA>
+5               Single
+6               Single
+7               Single
+8                 <NA>
+9               Single
+10             Married
+> my_friends_info <- getUsers(my_friends$id,token=token,private_info=TRUE)
+Error in callAPI(query, token) : 
+  (#12) username is deprecated for versions v2.0 and higher
+> BOOO
+Error: object 'BOOO' not found
+> table(my_friends$relationship_status)
+
+In a relationship           Married            Single 
+                2                 1                 4 
+> install.packages("devtools")
+Installing package into ‘C:/Users/compa_000/Documents/R/win-library/3.1’
+(as ‘lib’ is unspecified)
+--- Please select a CRAN mirror for use in this session ---
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/devtools_1.6.1.zip'
+Content type 'application/zip' length 284419 bytes (277 Kb)
+opened URL
+downloaded 277 Kb
+
+package ‘devtools’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+        C:\Users\compa_000\AppData\Local\Temp\RtmpQPCan2\downloaded_packages
+> library(devtools)
+WARNING: Rtools is required to build R packages, but is not currently installed.
+
+Please download and install Rtools 3.1 from http://cran.r-project.org/bin/windows/Rtools/ and then run find_rtools().
+Warning message:
+package ‘devtools’ was built under R version 3.1.2 
+> install_github("geoffjentry/twitteR")
+Downloading github repo geoffjentry/twitteR@master
+Installing twitteR
+Installing dependencies for twitteR:
+bit64
+Installing package into ‘C:/Users/compa_000/Documents/R/win-library/3.1’
+(as ‘lib’ is unspecified)
+also installing the dependency ‘bit’
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/bit_1.1-12.zip'
+Content type 'application/zip' length 217495 bytes (212 Kb)
+opened URL
+downloaded 212 Kb
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/bit64_0.9-4.zip'
+Content type 'application/zip' length 455839 bytes (445 Kb)
+opened URL
+downloaded 445 Kb
+
+package ‘bit’ successfully unpacked and MD5 sums checked
+package ‘bit64’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+        C:\Users\compa_000\AppData\Local\Temp\RtmpQPCan2\downloaded_packages
+"C:/PROGRA~1/R/R-31~1.1/bin/x64/R" --vanilla CMD INSTALL  \
+  "C:\Users\compa_000\AppData\Local\Temp\RtmpQPCan2\devtools1a185aae17c4\geoffjentry-twitteR-74c168a"  \
+  --library="C:/Users/compa_000/Documents/R/win-library/3.1" --install-tests 
+
+* installing *source* package 'twitteR' ...
+** R
+** inst
+** preparing package for lazy loading
+Creating a generic function for 'as.data.frame' from package 'base' in package 'twitteR'
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+*** arch - i386
+*** arch - x64
+* DONE (twitteR)
+> library(twitteR)
+
+Attaching package: ‘twitteR’
+
+The following object is masked from ‘package:Rfacebook’:
+
+    updateStatus
+
+> api_secret <- "H4RDWntVK7kFN0Qs9aEMqxGl1VAeXg2GX3Qzq5hmCz693KYy2u
++ "
+> api_key <- "oEILowktZRwia92qSLD54Ct1s"
+> access_token <- "2173134992-GRmDeojSwLvZSRrP0t3Ga3zJ9Aa33NmRNS4jiQr"
+> access_token_secret <- "iItQkzscUBBm9yld1hJtATKTOyokmn85tKeXODOs3AVaG"
+> setup_twitter_oauth(api_key,api_secret,access_token,access_token_secret)
+[1] "Using direct authentication"
+Error in check_twitter_oauth() : OAuth authentication error:
+This most likely means that you have incorrectly called setup_twitter_oauth()'
+> setup_twitter_oauth(api_key,api_secret,access_token,access_token_secret)
+[1] "Using direct authentication"
+Error in check_twitter_oauth() : OAuth authentication error:
+This most likely means that you have incorrectly called setup_twitter_oauth()'
+> api_secret <- "H4RDWntVK7kFN0Qs9aEMqxGl1VAeXg2GX3Qzq5hmCz693KYy2u"
+> api_key <- "oEILowktZRwia92qSLD54Ct1s"
+> access_token <- "2173134992-GRmDeojSwLvZSRrP0t3Ga3zJ9Aa33NmRNS4jiQr"
+> access_token_secret <- "iItQkzscUBBm9yld1hJtATKTOyokmn85tKeXODOs3AVaG"
+> setup_twitter_oauth(api_key,api_secret,access_token,access_token_secret)
+[1] "Using direct authentication"
+> friendships(screen_names=character(),user_ids=charater(),)
+Error in friendships(screen_names = character(), user_ids = charater(),  : 
+  could not find function "charater"
+> install.packages("igraph")
+Installing package into ‘C:/Users/compa_000/Documents/R/win-library/3.1’
+(as ‘lib’ is unspecified)
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/igraph_0.7.1.zip'
+Content type 'application/zip' length 7368442 bytes (7.0 Mb)
+opened URL
+downloaded 7.0 Mb
+
+package ‘igraph’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+        C:\Users\compa_000\AppData\Local\Temp\RtmpQPCan2\downloaded_packages
+> ary(igraph)
+Error: could not find function "ary"
+> library(igraph)
+> friendships(screen_names=character(1),user_ids=character())
+data frame with 0 columns and 0 rows
+> library(RCurl)
+Loading required package: bitops
+> friendships(screen_names=characters(100),user_ids=character(100)
++ )
+Error in friendships(screen_names = characters(100), user_ids = character(100)) : 
+  could not find function "characters"
+> friendships(screen_names=character(100),user_ids=character(100)
++ )
+Error in friendships(screen_names = character(100), user_ids = character(100)) : 
+  friendships() has a maximum of 100 total user ids and screen names
+> friendships(screen_names

@@ -1,0 +1,34 @@
+> getwd()
+[1] "C:/Users/compa_000/Documents"
+> setwd("ISAT 252")
+> dir()
+[1] "Acquiring Data Notes.doc"                           
+[2] "contract.csv"                                       
+[3] "Good Morning Structure"                             
+[4] "Ice Cream Survey (Responses) - Form Responses 1.csv"
+[5] "Ice Cream Survey.csv"                               
+[6] "UCBAdmissions.csv"                                  
+> ice cream <- read.csv("Ice Cream Survey.csv")
+Error: unexpected symbol in "ice cream"
+> temp <- read.csv("Ice Cream Survey.csv")
+> head(temp)
+       Timestamp What.is.your.favorite.flavor.of.ice.cream.
+1 9/9/2014 12:07                                  Chocolate
+2 9/9/2014 12:07                          Cookies and Cream
+3 9/9/2014 12:07                                  Chocolate
+4 9/9/2014 12:08                                   Vanilla 
+5 9/9/2014 12:09                               Cookie Dough
+6 9/9/2014 12:11                                    Vanilla
+> str(temp)
+'data.frame':   26 obs. of  2 variables:
+ $ Timestamp                                 : Factor w/ 24 levels "9/10/2014 13:42",..: 5 5 5 6 7 8 9 10 11 12 ...
+ $ What.is.your.favorite.flavor.of.ice.cream.: Factor w/ 7 levels "Chocolate","Cookie Dough",..: 1 3 1 7 2 6 6 2 4 4 ...
+> aggregate(Timestamp~What.is.your.favorite.flavor.of.ice.cream., data=temp, FUN=list)
+  What.is.your.favorite.flavor.of.ice.cream.                       Timestamp
+1                                  Chocolate                        5, 5, 14
+2                               Cookie Dough           7, 10, 13, 15, 16, 21
+3                          Cookies and Cream                               5
+4                        Mint Chocolate Chip 11, 12, 18, 20, 22, 24, 1, 2, 4
+5                          Peanut Butter Cup                       19, 23, 3
+6                                    Vanilla                        8, 9, 17
+7                                   Vanilla                                6

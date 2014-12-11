@@ -1,0 +1,40 @@
+getMyCurrentPoints <- function(me) {
+source_https <- function(u, unlink.tmp.certs = FALSE) {
+  require(RCurl)
+  if(!file.exists("cacert.pem")) {
+	download.file(url="http://curl.haxx.se/ca/cacert.pem", destfile = "cacert.pem")
+  }
+  script <- getURL(u, followlocation = TRUE, cainfo = "cacert.pem")
+  if(unlink.tmp.certs) unlink("cacert.pem")
+  eval(parse(text = script), envir= .GlobalEnv)
+}
+source_https("https://raw.githubusercontent.com/roseph/252-Redesign/master/loadPoints.R")
+courses <- unique(df$class)
+sc.pairs <- unique(df[,c("student","class")])
+lookup.class <- new.env()
+for (i in 1:nrow(sc.pairs)) {  
+   lookup.class[[ sc.pairs$student[i] ]] <- sc.pairs$class[i] 
+}
+me <- "comparar"
+my.course <- which(courses==lookup.class[[me]])
+for (s in me) {
+     my.stuff <- rbind(df[df$student=="ALL" &
+		df$class==courses[my.course],],df[df$student==s,])
+     my.points <- sum(as.integer(my.stuff$points))
+     writeLines(paste(s,"-- you currently have", my.points,
+	"points! The tasks you have completed are:"), con=stdout(), sep="\n\n")
+     print(my.stuff, quote = FALSE, row.names = FALSE)
+}
+for (this.course in 1:length(my.course)) {
+   current.totals <- aggregate(as.integer(df[df$class==courses[this.course],]$points), 
+	by=list(df[df$class==courses[this.course],]$student), FUN=sum)
+   writeLines(paste("Leaderboard for",courses[this.course]), con=stdout(), sep="\n")
+   print(current.totals[rev(order(current.totals$x)),], quote=FALSE, row.names=FALSE)
+}
+   if (nrow(df[df$student=="ALL" & df$class==courses[my.course],]) > 0) {
+      current.all <- sum(as.integer(df[df$student=="ALL" & 
+		df$class==courses[my.course],]$points))
+   } else {
+      current.all <- 0
+   }
+}

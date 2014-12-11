@@ -1,0 +1,350 @@
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> utils:::menuInstallPkgs()
+--- Please select a CRAN mirror for use in this session ---
+Warning in install.packages(NULL, .libPaths()[1L], dependencies = NA, type = type) :
+  'lib = "C:/Program Files/R/R-3.1.1/library"' is not writable
+also installing the dependency ‘bitops’
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/bitops_1.0-6.zip'
+Content type 'application/zip' length 36021 bytes (35 Kb)
+opened URL
+downloaded 35 Kb
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/RCurl_1.95-4.3.zip'
+Content type 'application/zip' length 2835499 bytes (2.7 Mb)
+opened URL
+downloaded 2.7 Mb
+
+package ‘bitops’ successfully unpacked and MD5 sums checked
+package ‘RCurl’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+        C:\Users\compa_000\AppData\Local\Temp\RtmpIz6gKF\downloaded_packages
+> library("RCurl")
+Loading required package: bitops
+> url <- "https://docs.google.com/spreadsheet/pub?"
+> url <-paste(url,"key=0AoVN55Hx1NvKdHh1S2sxQzRkSHlzLW1kVjREVFh4Z2c&single=true",sep="")
+> url <- paste(url,"&gid=0&outpu=csv",sep="")
+> spreadsheet.data <- getURL(url,ssl.verifypeer=FALSE)
+> str(spreadsheet.data)
+ chr "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\"><html><head><meta http-equiv=\"co"| __truncated__
+> str(spreadsheet.data)
+ chr "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\"><html><head><meta http-equiv=\"co"| __truncated__
+> points <- read.csv(textConnection(spreadsheet.data))
+> str(points)
+'data.frame':   40 obs. of  1 variable:
+ $ X..DOCTYPE.HTML.PUBLIC....W3C..DTD.HTML.4.01..EN.http...www.w3.org.TR.html4.strict.dtd..html..head..meta.http.equiv.content.type.content.text.html..charset.UTF.8.: Factor w/ 35 levels "          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);",..: 22 21 26 19 20 12 15 18 11 13 ...
+> str(spreadsheet.data)
+ chr "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\"><html><head><meta http-equiv=\"co"| __truncated__
+> url <- "https://docs.google.com/spreadsheet/pub?"
+> url <- paste(url,"key=0AoVN55Hx1NvKdHhlNvKdHh1S2QzRkSHlzLW1kVjREVFh4Z2c&single=true",sep="")
+> url <- paste(url,"&gid=0&output=csv",sep="")
+> spreadsheet.data <- getURL(url,ssl.verifypeer=FALSE)
+> str(spreadsheet.data)
+ chr "<!DOCTYPE html><html lang=\"en\" ><head><meta name=\"description\" content=\"Web word processing, presentations and spreadsheet"| __truncated__
+> url <- "https://docs.google.com/spreadsheet/pub?"
+> url <- paste(url,"key=0AoVN5HxlNvKdHh1S2sxQzRkSHlzLw1kVjREVFH4Z2c&single=true",sep="")
+> url <- paste(url,"&gid=0&output=csv",sep="")
+> spreadsheet.data <- getURL(url,ssl.verifypeer=FASLE)
+Error in merge(list(...), .opts) : object 'FASLE' not found
+> spreadsheet.data <- getURL(url,ssl.verifypeer=FALSE)
+> str(spreadsheet.data)
+ chr "<!DOCTYPE html><html lang=\"en\" ><head><meta name=\"description\" content=\"Web word processing, presentations and spreadsheet"| __truncated__
+> url <- "https://docs.google.com/spreadsheet/pub?"
+> url <- paste(url,"key=0AoVN55HxlNvKdHh1S2sxQzRkSHlzLW1kVjREVFh4Z2c&single=true",sep="")
+> url <- paste(url,"&gid=0&output=csv",sep="")
+> spreadsheet.data <- getURL(url,ssl.verifypeer=FALSE)
+> str(spreadsheet.data)
+ chr "who,what,when,points\nesquildf,RNG Exponential,1/27/2014,2\nesquildf,RNG Weibull,1/27/2014,1\nesquildf,RNG Triangular,1/27/2014"| __truncated__
+> points <- read.csv(textConnection(spreadsheet.data)
++ )
+> str(points)
+'data.frame':   422 obs. of  4 variables:
+ $ who   : Factor w/ 47 levels "ander3ad","ayersjc",..: 12 12 12 12 37 37 37 37 22 22 ...
+ $ what  : Factor w/ 91 levels "ABM Exploration",..: 78 81 80 72 78 81 80 72 78 80 ...
+ $ when  : Factor w/ 30 levels "1/27/2014","2/1/2014",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ points: int  2 1 1 2 2 1 1 2 2 1 ...
+> points <- read.csv(textConnection(spreadsheet.data))
+> str(points)
+'data.frame':   422 obs. of  4 variables:
+ $ who   : Factor w/ 47 levels "ander3ad","ayersjc",..: 12 12 12 12 37 37 37 37 22 22 ...
+ $ what  : Factor w/ 91 levels "ABM Exploration",..: 78 81 80 72 78 81 80 72 78 80 ...
+ $ when  : Factor w/ 30 levels "1/27/2014","2/1/2014",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ points: int  2 1 1 2 2 1 1 2 2 1 ...
+> utils:::menuInstallPkgs()
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/rjson_0.2.14.zip'
+Content type 'application/zip' length 492031 bytes (480 Kb)
+opened URL
+downloaded 480 Kb
+
+package ‘rjson’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+        C:\Users\compa_000\AppData\Local\Temp\RtmpIz6gKF\downloaded_packages
+> json.file <- "http://api.wunderground.com/api/key/conditions/q/VA/Harrisonburg.comparar
++ json.file <- "http://api.wunderground.com/api/key/conditions/q/VA/Harrisonburg.comparar"
+Error: unexpected symbol in:
+"json.file <- "http://api.wunderground.com/api/key/conditions/q/VA/Harrisonburg.comparar
+json.file <- "http"
+> json.file <- 6c38a7df0f4063fc
+Error: unexpected symbol in "json.file <- 6c38a7df0f4063fc"
+> json.file <- "www.wunderground.com/api/key/conditions/q/VA/Harrisonburg.json"
+> json.data <- fromJSON(paste(readLines(json.file), collapse="")
++ 
++ a;lskfj
+Error: unexpected symbol in:
+"
+a"
+> json.data <- fromJSON(paste(readLines(json.file), collapse""))
+Error: unexpected string constant in "json.data <- fromJSON(paste(readLines(json.file), collapse"""
+> json.data <- fromJSON(paste(readLines(json.file), collapse="")
++ )
+Error: could not find function "fromJSON"
+> str(json.data)
+Error in str(json.data) : object 'json.data' not found
+> json.file <- "http://www.wunderground.com/api/key/conditions/q/VA/Harrisonburg.json"
+> json.data <- fromJSON(paste(readLines(json.file),collapse="")
++ jj
+Error: unexpected symbol in:
+"json.data <- fromJSON(paste(readLines(json.file),collapse="")
+jj"
+> json.data <- fromJSON(paste(readLines(json.file),collapse=""))
+Error: could not find function "fromJSON"
+> utils:::menuInstallPkgs()
+Error in install.packages(NULL, .libPaths()[1L], dependencies = NA, type = type) : 
+  no packages were specified
+> utils:::menuInstallPkgs()
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/rjson_0.2.14.zip'
+Content type 'application/zip' length 492031 bytes (480 Kb)
+opened URL
+downloaded 480 Kb
+
+package ‘rjson’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+        C:\Users\compa_000\AppData\Local\Temp\RtmpIz6gKF\downloaded_packages
+> json.data <- fromjson(paste(readLines(json.file),collapse=""
++ ))
+Error: could not find function "fromjson"
+> getwd()
+[1] "C:/Users/compa_000/Documents"
+> setwd("ISAT 252")
+> dir()
+[1] "Acquiring Data Notes.doc"                           
+[2] "contract.csv"                                       
+[3] "Good Morning Structure"                             
+[4] "Ice Cream Survey (Responses) - Form Responses 1.csv"
+[5] "Ice Cream Survey.csv"                               
+[6] "UCBAdmissions.csv"                                  
+> temp <- read.csv("Ice Cream Survey.csv")
+> head(temp)
+       Timestamp What.is.your.favorite.flavor.of.ice.cream.
+1 9/9/2014 12:07                                  Chocolate
+2 9/9/2014 12:07                          Cookies and Cream
+3 9/9/2014 12:07                                  Chocolate
+4 9/9/2014 12:08                                   Vanilla 
+5 9/9/2014 12:09                               Cookie Dough
+6 9/9/2014 12:11                                    Vanilla
+> str(temp)
+'data.frame':   26 obs. of  2 variables:
+ $ Timestamp                                 : Factor w/ 24 levels "9/10/2014 13:42",..: 5 5 5 6 7 8 9 10 11 12 ...
+ $ What.is.your.favorite.flavor.of.ice.cream.: Factor w/ 7 levels "Chocolate","Cookie Dough",..: 1 3 1 7 2 6 6 2 4 4 ...
+> aggregate(What.is.your.favorite.flavor.of.ice.cream.~Timestamp, data=temp, FUN=mean)
+         Timestamp What.is.your.favorite.flavor.of.ice.cream.
+1  9/10/2014 13:42                                         NA
+2  9/10/2014 16:39                                         NA
+3  9/10/2014 22:19                                         NA
+4  9/10/2014 23:51                                         NA
+5   9/9/2014 12:07                                         NA
+6   9/9/2014 12:08                                         NA
+7   9/9/2014 12:09                                         NA
+8   9/9/2014 12:11                                         NA
+9   9/9/2014 12:18                                         NA
+10  9/9/2014 12:31                                         NA
+11  9/9/2014 12:36                                         NA
+12  9/9/2014 12:38                                         NA
+13  9/9/2014 12:43                                         NA
+14  9/9/2014 12:45                                         NA
+15  9/9/2014 12:48                                         NA
+16  9/9/2014 12:50                                         NA
+17  9/9/2014 12:56                                         NA
+18  9/9/2014 13:13                                         NA
+19  9/9/2014 13:26                                         NA
+20  9/9/2014 13:31                                         NA
+21  9/9/2014 13:34                                         NA
+22  9/9/2014 14:12                                         NA
+23  9/9/2014 14:19                                         NA
+24  9/9/2014 23:02                                         NA
+There were 24 warnings (use warnings() to see them)
+> aggregate(What.is.your.favorite.flavor.of.ice.cream.~Timestamp, data=temp, FUN=list)
+         Timestamp What.is.your.favorite.flavor.of.ice.cream.
+1  9/10/2014 13:42                                          4
+2  9/10/2014 16:39                                          4
+3  9/10/2014 22:19                                          5
+4  9/10/2014 23:51                                          4
+5   9/9/2014 12:07                                    1, 3, 1
+6   9/9/2014 12:08                                          7
+7   9/9/2014 12:09                                          2
+8   9/9/2014 12:11                                          6
+9   9/9/2014 12:18                                          6
+10  9/9/2014 12:31                                          2
+11  9/9/2014 12:36                                          4
+12  9/9/2014 12:38                                          4
+13  9/9/2014 12:43                                          2
+14  9/9/2014 12:45                                          1
+15  9/9/2014 12:48                                          2
+16  9/9/2014 12:50                                          2
+17  9/9/2014 12:56                                          6
+18  9/9/2014 13:13                                          4
+19  9/9/2014 13:26                                          5
+20  9/9/2014 13:31                                          4
+21  9/9/2014 13:34                                          2
+22  9/9/2014 14:12                                          4
+23  9/9/2014 14:19                                          5
+24  9/9/2014 23:02                                          4
+> aggregate(What.is.your.favorite.flavor.of.ice.cream., data=temp, FUN=lisit)
+Error in aggregate(What.is.your.favorite.flavor.of.ice.cream., data = temp,  : 
+  object 'What.is.your.favorite.flavor.of.ice.cream.' not found
+> aggregate(Timestamp~What.is.your.favorite.flavor.of.ice.cream., data=temp, FUN=list)
+  What.is.your.favorite.flavor.of.ice.cream.                       Timestamp
+1                                  Chocolate                        5, 5, 14
+2                               Cookie Dough           7, 10, 13, 15, 16, 21
+3                          Cookies and Cream                               5
+4                        Mint Chocolate Chip 11, 12, 18, 20, 22, 24, 1, 2, 4
+5                          Peanut Butter Cup                       19, 23, 3
+6                                    Vanilla                        8, 9, 17
+7                                   Vanilla                                6
+> json.file <- "http://www.isat.jmu.edu/"
+> json.data <- fromJSON(paste(readLines(json.file,collapse=""))
++ 
++ l
+Error: unexpected symbol in:
+"
+l"
+> json.data <- fromJSON(paste(readLines(json.file),collapse=""))
+Error: could not find function "fromJSON"
+> library("rjson")
+> json.data <- fromJSON(paste(readLines(json.file),collapse=""))
+Error in fromJSON(paste(readLines(json.file), collapse = "")) : 
+  unexpected character '<'
+> json.file <- "http://api.wunderground.com/api/6c38a7df0f4063fc/conditions/q/CA/San_Francisco.json"
+> json.data <- fromJSON(paste(readLines(json.file), collapse="")
++ s
+Error: unexpected symbol in:
+"json.data <- fromJSON(paste(readLines(json.file), collapse="")
+s"
+> json.data <- fromJSON(paste(readLines(json.file), collapse=""))
+> str(json.data)
+List of 2
+ $ response           :List of 3
+  ..$ version       : chr "0.1"
+  ..$ termsofService: chr "http://www.wunderground.com/weather/api/d/terms.html"
+  ..$ features      :List of 1
+  .. ..$ conditions: num 1
+ $ current_observation:List of 56
+  ..$ image                  :List of 3
+  .. ..$ url  : chr "http://icons.wxug.com/graphics/wu2/logo_130x80.png"
+  .. ..$ title: chr "Weather Underground"
+  .. ..$ link : chr "http://www.wunderground.com"
+  ..$ display_location       :List of 12
+  .. ..$ full           : chr "San Francisco, CA"
+  .. ..$ city           : chr "San Francisco"
+  .. ..$ state          : chr "CA"
+  .. ..$ state_name     : chr "California"
+  .. ..$ country        : chr "US"
+  .. ..$ country_iso3166: chr "US"
+  .. ..$ zip            : chr "94101"
+  .. ..$ magic          : chr "1"
+  .. ..$ wmo            : chr "99999"
+  .. ..$ latitude       : chr "37.77500916"
+  .. ..$ longitude      : chr "-122.41825867"
+  .. ..$ elevation      : chr "47.00000000"
+  ..$ observation_location   :List of 8
+  .. ..$ full           : chr "NEMA, San Francisco, California"
+  .. ..$ city           : chr "NEMA, San Francisco"
+  .. ..$ state          : chr "California"
+  .. ..$ country        : chr "US"
+  .. ..$ country_iso3166: chr "US"
+  .. ..$ latitude       : chr "37.776077"
+  .. ..$ longitude      : chr "-122.417542"
+  .. ..$ elevation      : chr "102 ft"
+  ..$ estimated              : list()
+  ..$ station_id             : chr "KCASANFR291"
+  ..$ observation_time       : chr "Last Updated on September 11, 8:51 AM PDT"
+  ..$ observation_time_rfc822: chr "Thu, 11 Sep 2014 08:51:00 -0700"
+  ..$ observation_epoch      : chr "1410450660"
+  ..$ local_time_rfc822      : chr "Thu, 11 Sep 2014 09:05:26 -0700"
+  ..$ local_epoch            : chr "1410451526"
+  ..$ local_tz_short         : chr "PDT"
+  ..$ local_tz_long          : chr "America/Los_Angeles"
+  ..$ local_tz_offset        : chr "-0700"
+  ..$ weather                : chr "Partly Cloudy"
+  ..$ temperature_string     : chr "60.6 F (15.9 C)"
+  ..$ temp_f                 : num 60.6
+  ..$ temp_c                 : num 15.9
+  ..$ relative_humidity      : chr "94%"
+  ..$ wind_string            : chr "Calm"
+  ..$ wind_dir               : chr "North"
+  ..$ wind_degrees           : num -999
+  ..$ wind_mph               : num -999
+  ..$ wind_gust_mph          : num 0
+  ..$ wind_kph               : num 0
+  ..$ wind_gust_kph          : num 0
+  ..$ pressure_mb            : chr "1013"
+  ..$ pressure_in            : chr "29.91"
+  ..$ pressure_trend         : chr "+"
+  ..$ dewpoint_string        : chr "58 F (15 C)"
+  ..$ dewpoint_f             : num 58
+  ..$ dewpoint_c             : num 15
+  ..$ heat_index_string      : chr "NA"
+  ..$ heat_index_f           : chr "NA"
+  ..$ heat_index_c           : chr "NA"
+  ..$ windchill_string       : chr "NA"
+  ..$ windchill_f            : chr "NA"
+  ..$ windchill_c            : chr "NA"
+  ..$ feelslike_string       : chr "60.6 F (15.9 C)"
+  ..$ feelslike_f            : chr "60.6"
+  ..$ feelslike_c            : chr "15.9"
+  ..$ visibility_mi          : chr "10.0"
+  ..$ visibility_km          : chr "16.1"
+  ..$ solarradiation         : chr "--"
+  ..$ UV                     : chr "2"
+  ..$ precip_1hr_string      : chr "-999.00 in ( 0 mm)"
+  ..$ precip_1hr_in          : chr "-999.00"
+  ..$ precip_1hr_metric      : chr " 0"
+  ..$ precip_today_string    : chr "-999.00 in (-25375 mm)"
+  ..$ precip_today_in        : chr "-999.00"
+  ..$ precip_today_metric    : chr "--"
+  ..$ icon                   : chr "partlycloudy"
+  ..$ icon_url               : chr "http://icons.wxug.com/i/c/k/partlycloudy.gif"
+  ..$ forecast_url           : chr "http://www.wunderground.com/US/CA/San_Francisco.html"
+  ..$ history_url            : chr "http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID=KCASANFR291"
+  ..$ ob_url                 : chr "http://www.wunderground.com/cgi-bin/findweather/getForecast?query=37.776077,-122.417542"
+  ..$ nowcast                : chr "Areas of dense fog are expected through the mid morning hours\nwith clearing expected by late morning. Visibility will be\nredu"| __truncated__
+> json.data$current_observation$display_location$latitude
+[1] "37.77500916"
+> is.numeric(json.data$current_observation$display_location$latitude)
+[1] FALSE
+> is.character(json.data$current_obervation$display_location$latitude)
+[1] FALSE
+>

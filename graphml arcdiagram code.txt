@@ -1,0 +1,43 @@
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> library(igraph)
+> library(arcdiagram)
+> library(devtools)
+WARNING: Rtools is required to build R packages, but is not currently installed.
+
+Please download and install Rtools 3.1 from http://cran.r-project.org/bin/windows/Rtools/ and then run find_rtools().
+Warning message:
+package ‘devtools’ was built under R version 3.1.2 
+> getwd()
+[1] "C:/Users/compa_000/Documents"
+> setwd("ISAT 252")                                 
+> fb_file <- "facebook1.graphml"
+> fb_graph <- read.graph(fb_file,format="graphml")
+> edgelist <- get.edgelist(fb_graph)
+> vlabels=get.vertex.attribute(fb_graph,"label")
+> vgroups=get.vertex.attribute(fb_graph,"group")
+> vfill=get.vertex.attribute(fb_graph,"fill")
+> vborders=get.vertex.attribute(fb_graph,"border")
+> degrees=degree(fb_graph)
+> values=get.edge.attribute(fb_graph,"value")
+> arcplot(edgelist,labels=vlabels,cex.labels=0.0075,show.nodes=TRUE,col.nodes=vborders,bg.nodes=vfill,cex.nodes=log(degrees)+0.5,pch.nodes=21,lwd.nodes=2,line=-0.5,col.arcs=hsv(0,0,0.2,0.25),lwd.arcs=1.5*values)
+

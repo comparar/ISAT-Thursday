@@ -1,0 +1,515 @@
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> library(maps)
+> library(geosphere)
+Loading required package: sp
+> library(sp)
+> map("state")
+> map("world")
+> xlim <- c(-171.738281, -56.601563)
+> ylim <- c(12.039321, 71.856229)
+> map("world", col="ghostwhite", fill=TRUE, bg="white", lwd=0.05, xlim=xlim, ylim=ylim)
+> a <- geocode("SAN DIEGO")
+Error: could not find function "geocode"
+> install.packages("ggplot2","ggmap")
+Warning in install.packages("ggplot2", "ggmap") :
+  'lib = "ggmap"' is not writable
+--- Please select a CRAN mirror for use in this session ---
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/ggplot2_1.0.0.zip'
+Content type 'application/zip' length 2674691 bytes (2.6 Mb)
+opened URL
+downloaded 2.6 Mb
+
+package ‘ggplot2’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+        C:\Users\compa_000\AppData\Local\Temp\RtmpmqlUBa\downloaded_packages
+> library(ggplot2)
+Find out what's changed in ggplot2 with
+news(Version == "1.0.0", package = "ggplot2")
+> library(ggmap)
+> cities <- c("SAN DIEGO","OCEANSIDE","SAN FRANCISCO","SEDONA","MESA","PHOENIX","DENVER","RALEIGH","DULLES","WILLIAMSBURG","HARRISONBURG","CHARLOTTESVILLE","ASHBURN","WASHINGTON DC",
++ "MANHATTAN","ORLANDO","RALIEGH")
+> geocode(cities)
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=SAN+DIEGO&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=OCEANSIDE&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=SAN+FRANCISCO&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=SEDONA&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=MESA&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=PHOENIX&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=DENVER&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=RALEIGH&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=DULLES&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=WILLIAMSBURG&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=HARRISONBURG&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=CHARLOTTESVILLE&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=ASHBURN&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+DC&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=MANHATTAN&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=ORLANDO&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=RALIEGH&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+          lon      lat
+1  -117.16108 32.71574
+2  -117.37948 33.19587
+3  -122.41942 37.77493
+4  -111.76099 34.86974
+5  -111.83147 33.41518
+6  -112.07404 33.44838
+7  -104.98472 39.73757
+8   -78.63818 35.77959
+9   -77.44808 38.95162
+10  -76.70746 37.27070
+11  -78.86892 38.44957
+12  -78.47668 38.02931
+13  -77.48744 39.04376
+14  -77.03687 38.90719
+15  -73.95972 40.79028
+16  -81.37924 28.53834
+17  -78.63818 35.77959
+> "MANHATTAN","ORLANDO","RALEIGH")
+Error: unexpected ',' in ""MANHATTAN","
+> cities <- c("SAN DIEGO","OCEANSIDE","SAN FRANCISCO","SEDONA","MESA","PHOENIX","DENVER","RALEIGH","DULLES","WILLIAMSBURG","HARRISONBURG","CHARLOTTESVILLE","ASHBURN","WASHINGTON DC","MANHATTAN","ORLANDO","RALEIGH","HILTON HEAD")
+> geocode(cities)
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=SAN+DIEGO&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=OCEANSIDE&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=SAN+FRANCISCO&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=SEDONA&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=MESA&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=PHOENIX&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=DENVER&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=RALEIGH&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=DULLES&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=WILLIAMSBURG&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=HARRISONBURG&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=CHARLOTTESVILLE&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=ASHBURN&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+DC&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=MANHATTAN&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=ORLANDO&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=RALEIGH&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=HILTON+HEAD&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+          lon      lat
+1  -117.16108 32.71574
+2  -117.37948 33.19587
+3  -122.41942 37.77493
+4  -111.76099 34.86974
+5  -111.83147 33.41518
+6  -112.07404 33.44838
+7  -104.98472 39.73757
+8   -78.63818 35.77959
+9   -77.44808 38.95162
+10  -76.70746 37.27070
+11  -78.86892 38.44957
+12  -78.47668 38.02931
+13  -77.48744 39.04376
+14  -77.03687 38.90719
+15  -73.95972 40.79028
+16  -81.37924 28.53834
+17  -78.63818 35.77959
+18  -80.75261 32.21632
+> gcities <- geocode(cities)
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=SAN+DIEGO&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=OCEANSIDE&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=SAN+FRANCISCO&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=SEDONA&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=MESA&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=PHOENIX&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=DENVER&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=RALEIGH&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=DULLES&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=WILLIAMSBURG&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=HARRISONBURG&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=CHARLOTTESVILLE&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=ASHBURN&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+DC&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=MANHATTAN&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=ORLANDO&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=RALEIGH&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=HILTON+HEAD&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+> inter <- gcIntermediate(gcities, n=50, addStartEnd=TRUE)
+Error in inherits(p, "SpatialPoints") : 
+  argument "p2" is missing, with no default
+> long_1 <- -117.16108
+> lat_1 <- 32.71574
+> long_2 <- -117.37948
+> cities <- c("SAN DIEGO","OCEANSIDE","SAN FRANCISCO","SEDONA","MESA","PHOENIX","DENVER","RALEIGH","DULLES","WILLIAMSBURG","HARRISONBURG","CHARLOTTESVILLE","ASHBURN","WASHINGTON DC","MANHATTAN","ORLANDO","GORDONSVILLE","HILTON HEAD")
+> geocode(cities)
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=SAN+DIEGO&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=OCEANSIDE&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=SAN+FRANCISCO&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=SEDONA&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=MESA&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=PHOENIX&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=DENVER&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=RALEIGH&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=DULLES&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=WILLIAMSBURG&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=HARRISONBURG&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=CHARLOTTESVILLE&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=ASHBURN&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=WASHINGTON+DC&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=MANHATTAN&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=ORLANDO&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+.Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=GORDONSVILLE&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=HILTON+HEAD&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+          lon      lat
+1  -117.16108 32.71574
+2  -117.37948 33.19587
+3  -122.41942 37.77493
+4  -111.76099 34.86974
+5  -111.83147 33.41518
+6  -112.07404 33.44838
+7  -104.98472 39.73757
+8   -78.63818 35.77959
+9   -77.44808 38.95162
+10  -76.70746 37.27070
+11  -78.86892 38.44957
+12  -78.47668 38.02931
+13  -77.48744 39.04376
+14  -77.03687 38.90719
+15  -73.95972 40.79028
+16  -81.37924 28.53834
+17  -78.18778 38.13736
+18  -80.75261 32.21632
+> getwd()
+[1] "C:/Users/compa_000/Documents"
+> setwd("ISAT 252
++ ")
+Error in setwd("ISAT 252\n") : cannot change working directory
+> setwd("ISAT 252")
+> cities <- read.csv("Cities.csv")
+> cities
+              City  Longitude Latitude
+1        San Diego -117.16108 32.71574
+2        Oceanside -117.37948 33.19587
+3    San Francisco -122.41942 37.77493
+4           Sedona -111.76099 34.86974
+5             Mesa -111.83147 33.41518
+6          Phoenix -112.07404 33.44838
+7           Denver -104.98472 39.73757
+8          Raleigh  -78.63818 35.77959
+9           Dulles  -77.44808 38.95162
+10    Williamsburg  -77.44808 37.27070
+11    Harrisonburg  -78.86892 38.44957
+12 Charlottesville  -78.47668 38.02931
+13         Ashburn  -77.48744 39.04376
+14   Washington DC  -77.03687 38.90719
+15       Manhattan  -73.95972 40.79028
+16         Orlando  -81.37924 28.53834
+17    Gordonsville  -78.18778 38.13736
+18     Hilton Head  -80.75261 32.21632
+> str(cities)
+'data.frame':   18 obs. of  3 variables:
+ $ City     : Factor w/ 18 levels "Ashburn","Charlottesville",..: 14 10 15 16 9 12 3 13 4 18 ...
+ $ Longitude: num  -117 -117 -122 -112 -112 ...
+ $ Latitude : num  32.7 33.2 37.8 34.9 33.4 ...
+> head(csv)
+Error in head(csv) : object 'csv' not found
+> head(cities)
+           City Longitude Latitude
+1     San Diego -117.1611 32.71574
+2     Oceanside -117.3795 33.19587
+3 San Francisco -122.4194 37.77493
+4        Sedona -111.7610 34.86974
+5          Mesa -111.8315 33.41518
+6       Phoenix -112.0740 33.44838
+> city <- table(cities$Longitude$Latitude)
+Error in cities$Longitude$Latitude : 
+  $ operator is invalid for atomic vectors
+> city <- table(cities$Longitude)
+> city
+
+-122.41942 -117.37948 -117.16108 -112.07404 -111.83147 -111.76099 -104.98472 
+         1          1          1          1          1          1          1 
+ -81.37924  -80.75261  -78.86892  -78.63818  -78.47668  -78.18778  -77.48744 
+         1          1          1          1          1          1          1 
+ -77.44808  -77.03687  -73.95972 
+         2          1          1 
+> map("world", col="ghostwhite", fill=TRUE, bg="white", lwd=0.05, xlim=xlim, ylim=ylim)
+> city1 <- geocode(cities[1])
+Error: is.character(location) is not TRUE
+> city <- c("SAN DIEGO","OCEANSIDE","SAN FRANCISCO","SEDONA","MESA","PHOENIX","DENVER","RALEIGH","DULLES","WILLIAMSBURG","HARRISONBURG","CHARLOTTESVILLE","ASHBURN","WASHINGTON DC","MANHATTAN","ORLANDO","RALEIGH","HILTON HEAD")
+> city1 <- geocode(city[1])
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=SAN+DIEGO&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+> city2 <- geocode(city[2])
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=OCEANSIDE&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+> city3 <- gecode(city[3])
+Error: could not find function "gecode"
+> city3 <- geocode(city[3])
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=SAN+FRANCISCO&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+> city4 <- geocode(city[4])
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=SEDONA&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+> city5 <- geocode(city[5])
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=MESA&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+> city6 <- geocode(city[6])
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=PHOENIX&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+> inter2 <- gcIntermediate(c(city6),c(city5), n=50,addStartEnd=TRUE)
+Error in min(p[, 1], na.rm = TRUE) : invalid 'type' (list) of argument
+> city 6
+Error: unexpected numeric constant in "city 6"
+> city6
+       lon      lat
+1 -112.074 33.44838
+> lat1 <- 32.71574
+> lon1 <- -117.16108
+> lat2 <- 33.19587
+> lon2 <- -117.37948
+> lat3 <- 37.77493
+> lon3 <- -122.41942
+> lat4 <- 34.86974
+> lon4 <- -111.76099
+> lat5 <- 33.41518
+> lon5 <- -111.83147
+> lat6 <- 33.44838
+> lon6 <- -112.07404
+> lat 7 <- 39.73757
+Error: unexpected numeric constant in "lat 7"
+> lat7 <- 39.73757
+> lon7 <- -104.98472
+> lat8 <- 35.77959
+> lon8 <- -78.63818
+> lat9 <- 38.95162
+> lon9 <- -77.44808
+> lat10 <- 37.2707
+> lon10 <- -77.44808
+> lat11 <- 38.44957
+> lon11 <- -78.86892
+> lat12 <- 38.02931
+> lon12 <- 38.02931
+> lat12 <- 38.02931
+> lon12 <- -78.47668
+> lat13 <- 39.04376
+> lon13 <- -77.48744
+> lat14 <- 38.90719
+> lon14 <- -77.03687
+> lat15 <- 40.79028
+> lon15 <- -73.95972
+> lat16 <- 28.53834
+> lon16 <- -81.37924
+> lat17 <- 38.13736
+> lon17 <- -78.18778
+> lat18 <- 32.21632
+> lon18 <- -80.75261
+> inter2 <- gcIntermediate(c(lon1,lat1),c(lon2,lat2),c(lon3,lat3),c(lon4,lat4),c(lon5,lat5),c(lon6,lat6),c(lon7,lat7),c(lon8,lat8),c(lon9,lat9),c(lon10,lat10),c(lon11,lat11),c(lon12,lat12),c(lon13,lat13),c(lon14,lat14),c(lon15,lat15),c(lon16,lat16),c(lon17,lat17),c(lon18,lat18), n=50,addStartEnd=TRUE)
+Error in gcIntermediate(c(lon1, lat1), c(lon2, lat2), c(lon3, lat3), c(lon4,  : 
+  unused arguments (c(lon6, lat6), c(lon7, lat7), c(lon8, lat8), c(lon9, lat9), c(lon10, lat10), c(lon11, lat11), c(lon12, lat12), c(lon13, lat13), c(lon14, lat14), c(lon15, lat15), c(lon16, lat16), c(lon17, lat17), c(lon18, lat18))
+> inter2 <- gcIntermediate(c(lon1,lat1),c(lon2,lat2),c(lon3,lat3),c(lon4,lat4), n=50,addStartEnd=TRUE)
+Warning messages:
+1: In if (breakAtDateLine) { :
+  the condition has length > 1 and only the first element will be used
+2: In if (sp) { :
+  the condition has length > 1 and only the first element will be used
+> inter2 <- gcIntermediate(c(lon1,lat1), c(lon2,lat2), c(lon3,lat3), c(lon4,lat4), n=50,addStartEnd=TRUE)
+Warning messages:
+1: In if (breakAtDateLine) { :
+  the condition has length > 1 and only the first element will be used
+2: In if (sp) { :
+  the condition has length > 1 and only the first element will be used
+> lines(inter2, col="red")
+> inter2 <- gcIntermediate(c(lon1,lat1),c(lon2,lat2),c(lon3,lat3),c(lon4,lat4),c(lon5,lat5),c(lon6,lat6),c(lon7,lat7),c(lon8,lat8),c(lon9,lat9),c(lon10,lat10),c(lon11,lat11),c(lon12,lat12),c(lon13,lat13),c(lon14,lat14),c(lon15,lat15),c(lon16,lat16),c(lon17,lat17),c(lon18,lat18), n=50,addStartEnd=TRUE)
+Error in gcIntermediate(c(lon1, lat1), c(lon2, lat2), c(lon3, lat3), c(lon4,  : 
+  unused arguments (c(lon6, lat6), c(lon7, lat7), c(lon8, lat8), c(lon9, lat9), c(lon10, lat10), c(lon11, lat11), c(lon12, lat12), c(lon13, lat13), c(lon14, lat14), c(lon15, lat15), c(lon16, lat16), c(lon17, lat17), c(lon18, lat18))
+> lines(inter2, col="red"0
+Error: unexpected numeric constant in "lines(inter2, col="red"0"
+> lines(inter2, col="red")
+> inter1 <- gcIntermediat(c(lon1,lat1),c(lon2,lat2),c(lon3,lat3),c(lon4,lat4)
++ , n=50, addStartEnd=TRUE)
+Error: could not find function "gcIntermediat"
+> inter1 <- gcIntermediate(c(lon1,lat1),c(lon2,lat2),c(lon3,lat3),c(lon4,lat4),c(lon5,lat5), n=50, addStartEnd=TRUE)
+Warning messages:
+1: In if (breakAtDateLine) { :
+  the condition has length > 1 and only the first element will be used
+2: In if (sp) { :
+  the condition has length > 1 and only the first element will be used
+> lines(inter1, col="blue
++ ")
+Error in plot.xy(xy.coords(x, y), type = type, ...) : 
+  invalid color name 'blue
+'
+> lines(inter1, col="blue")
+> map("state")
+> inter1 <- gcIntermediate(c(lon1,lat1),c(lon2,lat2),c(lon3,lat3),c(lon4,lat4),c(lon5,lat5),c(lon6,lat6),c(lon7,lat7),c(lon8,lat8),c(lon9,lat9), n=50, addStartEnd=TRUE)
+Error in gcIntermediate(c(lon1, lat1), c(lon2, lat2), c(lon3, lat3), c(lon4,  : 
+  unused arguments (c(lon6, lat6), c(lon7, lat7), c(lon8, lat8), c(lon9, lat9))
+> inter1 <- gcIntermediate(c(lon1,lat1),c(lon2,lat2),c(lon3,lat3),c(lon4,lat4),c(lon5,lat5), n=50, addStartEnd=TRUE)
+Warning messages:
+1: In if (breakAtDateLine) { :
+  the condition has length > 1 and only the first element will be used
+2: In if (sp) { :
+  the condition has length > 1 and only the first element will be used
+> lines(inter1, col="blue")
+> inter1 <- gcIntermediate(c(lon1,lat1),c(lon5,lat5),n=50,addStartEnd=TRUE)
+> lines(inter1, col="blue")
+> geocode("CHANTILLY")
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=CHANTILLY&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+       lon      lat
+1 2.468739 49.19316
+> lon19 <- 2.468739
+> lat19 <- 49.19316
+> inter1 <- gcIntermediate(c(lon1,lat1),c(lon3,lat3),n=50,addStartEnd=TRUE)
+> lines(inter1,col="blue")
+> map("state")
+> inter1 <- gcIntermediate(c(lon1,lat1),c(lon3,lat3),n=50,addStartEnd=TRUE)
+> map("state")
+> inter1 <- gcIntermediate(c(lon1,lat1),c(lon3,lat3),n=50,addStartEnd=TRUE)
+> lines(inter1,col="blue")
+> inter2 <- gcIntermediate(c(lon3,lat3),c(lon19,lat19),n=50,addStartEnd=TRUE)
+> lines(inter2,col="red"0
+Error: unexpected numeric constant in "lines(inter2,col="red"0"
+> lines(inter2,col="red")
+> geocode("CENTERVILLE")
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=CENTERVILLE&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+        lon      lat
+1 -84.15938 39.62839
+> lon19 <- -84.15938
+> map("state")
+> lat19 <- 39.62839
+> inter2 <- gcIntermediate(c(lon3,lat3),c(lon19,lat19),n=50,addStartEnd=TRUE)
+> lines(inter1,col="blue")
+> lines(inter2,col="red")
+> geocode("FAIRFAX")
+Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=FAIRFAX&sensor=false
+Google Maps API Terms of Service : http://developers.google.com/maps/terms
+        lon      lat
+1 -77.30637 38.84622
+> lat19 <- -77.30637
+> lon19 <- -77.30637
+> lat19 <- 38.84622
+> inter2 <- gcIntermediate(c(lon3,lat3),c(lon19,lat19),n=50,addStartEnd=TRUE)
+> lines(inter2,col="red")
+> map("state)
++ :)
+
++ > map("state")
+> inter2 <- gcIntermediate(c(lon3,lat3),c(lon19,lat19),n=50,addStartEnd=TRUE)
+> inter2 <- gcIntermediate(c(lon3,lat3),c(lon19,lat19),n=50,addStartEnd=TRUE)
+> inter1 <- gcIntermediate(c(lon1,lat1),c(lon3,lat3),n=50,addStartEnd=TRUE)
+> lines(inter1,col="blue")
+> lines(inter2,col="red")
+> library(ggplot2)
+> library(EBImage)
+Error in library(EBImage) : there is no package called ‘EBImage’
+> intall.packages(EMImage)
+Error: could not find function "intall.packages"
+> install.packages(EMImage)
+Error in install.packages(EMImage) : object 'EMImage' not found
+> install.packages("EMImage")
+Installing package into ‘C:/Users/compa_000/Documents/R/win-library/3.1’
+(as ‘lib’ is unspecified)
+Warning message:
+package ‘EMImage’ is not available (for R version 3.1.1) 
+> map("state", col="yellow")
+Error in get(dbname) : object 'stateMapEnv' not found
+In addition: Warning message:
+In data(list = dbname, envir = environment()) :
+  data set ‘stateMapEnv’ not found
+> utils:::menuInstallPkgs()
+Error in install.packages(NULL, .libPaths()[1L], dependencies = NA, type = type) : 
+  no packages were specified
+> map("state")
+Error in get(dbname) : object 'stateMapEnv' not found
+In addition: Warning message:
+In data(list = dbname, envir = environment()) :
+  data set ‘stateMapEnv’ not found
+> library(map)
+Error in library(map) : there is no package called ‘map’
+> q()
+> 

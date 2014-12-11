@@ -1,0 +1,486 @@
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> utils:::menuInstallPkgs()
+--- Please select a CRAN mirror for use in this session ---
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/jpeg_0.1-8.zip'
+Content type 'application/zip' length 229591 bytes (224 Kb)
+opened URL
+downloaded 224 Kb
+
+package ‘jpeg’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+        C:\Users\compa_000\AppData\Local\Temp\RtmpkBjgD3\downloaded_packages
+> library("jpeg")
+> utils:::menuInstallPkgs()
+also installing the dependencies ‘colorspace’, ‘Rcpp’, ‘stringr’, ‘RColorBrewer’, ‘dichromat’, ‘munsell’, ‘labeling’, ‘plyr’, ‘digest’, ‘gtable’, ‘reshape2’, ‘scales’, ‘proto’
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/colorspace_1.2-4.zip'
+Content type 'application/zip' length 385036 bytes (376 Kb)
+opened URL
+downloaded 376 Kb
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/Rcpp_0.11.3.zip'
+Content type 'application/zip' length 3028698 bytes (2.9 Mb)
+opened URL
+downloaded 2.9 Mb
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/stringr_0.6.2.zip'
+Content type 'application/zip' length 75166 bytes (73 Kb)
+opened URL
+downloaded 73 Kb
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/RColorBrewer_1.0-5.zip'
+Content type 'application/zip' length 25396 bytes (24 Kb)
+opened URL
+downloaded 24 Kb
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/dichromat_2.0-0.zip'
+Content type 'application/zip' length 147681 bytes (144 Kb)
+opened URL
+downloaded 144 Kb
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/munsell_0.4.2.zip'
+Content type 'application/zip' length 126546 bytes (123 Kb)
+opened URL
+downloaded 123 Kb
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/labeling_0.3.zip'
+Content type 'application/zip' length 40792 bytes (39 Kb)
+opened URL
+downloaded 39 Kb
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/plyr_1.8.1.zip'
+Content type 'application/zip' length 1151959 bytes (1.1 Mb)
+opened URL
+downloaded 1.1 Mb
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/digest_0.6.4.zip'
+Content type 'application/zip' length 136470 bytes (133 Kb)
+opened URL
+downloaded 133 Kb
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/gtable_0.1.2.zip'
+Content type 'application/zip' length 63837 bytes (62 Kb)
+opened URL
+downloaded 62 Kb
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/reshape2_1.4.zip'
+Content type 'application/zip' length 498476 bytes (486 Kb)
+opened URL
+downloaded 486 Kb
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/scales_0.2.4.zip'
+Content type 'application/zip' length 151280 bytes (147 Kb)
+opened URL
+downloaded 147 Kb
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/proto_0.3-10.zip'
+Content type 'application/zip' length 458504 bytes (447 Kb)
+opened URL
+downloaded 447 Kb
+
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/ggplot2_1.0.0.zip'
+Content type 'application/zip' length 2675184 bytes (2.6 Mb)
+opened URL
+downloaded 2.6 Mb
+
+package ‘colorspace’ successfully unpacked and MD5 sums checked
+package ‘Rcpp’ successfully unpacked and MD5 sums checked
+package ‘stringr’ successfully unpacked and MD5 sums checked
+package ‘RColorBrewer’ successfully unpacked and MD5 sums checked
+package ‘dichromat’ successfully unpacked and MD5 sums checked
+package ‘munsell’ successfully unpacked and MD5 sums checked
+package ‘labeling’ successfully unpacked and MD5 sums checked
+package ‘plyr’ successfully unpacked and MD5 sums checked
+package ‘digest’ successfully unpacked and MD5 sums checked
+package ‘gtable’ successfully unpacked and MD5 sums checked
+package ‘reshape2’ successfully unpacked and MD5 sums checked
+package ‘scales’ successfully unpacked and MD5 sums checked
+package ‘proto’ successfully unpacked and MD5 sums checked
+package ‘ggplot2’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+        C:\Users\compa_000\AppData\Local\Temp\RtmpkBjgD3\downloaded_packages
+> library("ggplot2")
+> getwd()
+[1] "C:/Users/compa_000/Documents"
+> setwd("ISAT 252")
+> dir()
+ [1] "Acquiring Data Notes.doc"                           
+ [2] "Cloud.jpg"                                          
+ [3] "Clouds .jpg"                                        
+ [4] "Clouds.jpg"                                         
+ [5] "contract.csv"                                       
+ [6] "Good Morning Structure"                             
+ [7] "Ice Cream Survey (Responses) - Form Responses 1.csv"
+ [8] "Ice Cream Survey.csv"                               
+ [9] "qtrly-reports.csv"                                  
+[10] "qtrly-reports2.csv"                                 
+[11] "SG.jpg"                                             
+[12] "shadenorm.R"                                        
+[13] "UCBAdmissions.csv"                                  
+[14] "UCBAdmissions2.csv"                                 
+[15] "UCBAdmissions3.csv"                                 
+> img <- readJPEG("Cloud.jpg")
+> dim(img)
+[1] 1028 1230    3
+> imgDM <- dim(img)
+> imgRGB <- data.frame( 
++ x = rep(1:imgDM[2], each = imgDM[1]),
++ y = rep(imgDM[1]:1, imgDM[2]),
++ R = as.vector(img[,,1]),
++ G = as.vector(img[,,2]),
++ B = as.vector(img[,,3])
++ )
+> head(imgRGB)
+  x    y         R         G         B
+1 1 1028 0.9960784 0.9960784 0.9960784
+2 1 1027 0.9960784 0.9960784 0.9960784
+3 1 1026 0.9960784 0.9960784 0.9960784
+4 1 1025 0.9960784 0.9960784 0.9960784
+5 1 1024 0.9960784 0.9960784 0.9960784
+6 1 1023 0.9960784 0.9960784 0.9960784
+> ggplot(data=imgRGB, aes(x=x,y=y,col=G)) + geom_point()
+Error in grid.Call.graphics(L_upviewport, as.integer(n)) : 
+  cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)
+> dir()
+ [1] "Acquiring Data Notes.doc"                           
+ [2] "Cloud.jpg"                                          
+ [3] "Clouds .jpg"                                        
+ [4] "Clouds.jpg"                                         
+ [5] "contract.csv"                                       
+ [6] "Good Morning Structure"                             
+ [7] "Ice Cream Survey (Responses) - Form Responses 1.csv"
+ [8] "Ice Cream Survey.csv"                               
+ [9] "qtrly-reports.csv"                                  
+[10] "qtrly-reports2.csv"                                 
+[11] "Rose.jpg"                                           
+[12] "SG.jpg"                                             
+[13] "shadenorm.R"                                        
+[14] "UCBAdmissions.csv"                                  
+[15] "UCBAdmissions2.csv"                                 
+[16] "UCBAdmissions3.csv"                                 
+> img <- readJPEG("Rose.jpg")
+> dim(img)
+[1] 968 726   3
+> imgDM <- dim(img)
+> imgRGB <- data.frame(
++ x = rep(1:imgDM[2], each = imgDM[1]),
++ y = rep(imgDM[1]:1, imgDM[2]),
++ R = as.vector(img[,,1]),
++ G = as.vector(img[,,2]),
++ B = as.vector(img[,,3]))
+> head(imgRGB)
+  x   y         R         G         B
+1 1 968 0.6941176 0.7254902 0.8156863
+2 1 967 0.7019608 0.7333333 0.8235294
+3 1 966 0.6980392 0.7294118 0.8196078
+4 1 965 0.6980392 0.7294118 0.8117647
+5 1 964 0.7058824 0.7372549 0.8196078
+6 1 963 0.7058824 0.7372549 0.8196078
+> ggplot(data=imgRGB, aes(x=x,y=y,col=G)) + geom_point()
+> ggplot(data=imgRGB, aes(x=x,y=y,col=B)) + geom_point()
+> ggplot(data=imgRGB, aes(x=x,y=y,col=R)) + geom_point()
+> ggplot(data=imgRGB, aes(x=x,y=y,col=R,G,B)) + geom_point()
+> ggplot(data=imgRGB, aes(x=x,y=y,col=R,G,B))+geom_point()+scale_color_identity()
+> ggplot(data=imgRGB, aes(x=x,y=y,col=R,G,B))+geom_point()+scale_color_identity()
+> ggplot(data=imgRGB, aes(x=x,y=y,col=R)) + geom_point()
+> plotTheme <- function() {
++   theme(
++     panel.background = element_rect(
++       size = 3,
++       colour = "black",
++       fill = "white"),
++     axis.ticks = element_line(
++       size = 2),
++     panel.grid.major = element_line(
++       colour = "gray80",
++       linetype = "dotted"),
++     panel.grid.minor = element_line(
++       colour = "gray90",
++       linetype = "dashed"),
++     axis.title.x = element_text(
++       size = rel(1.2),
++       face = "bold"),
++     axis.title.y = element_text(
++       size = rel(1.2),
++       face = "bold"),
++     plot.title = element_text(
++       size = 20,
++       face = "bold",
++       vjust = 1.5)
++ 
++ 
+
+> plotTheme <- function() {
++   theme(
++     panel.background = element_rect(
++       size = 3,
++       colour = "black",
++       fill = "white"),
++     axis.ticks = element_line(
++       size = 2),
++     panel.grid.major = element_line(
++       colour = "gray80",
++       linetype = "dotted"),
++     panel.grid.minor = element_line(
++       colour = "gray90",
++       linetype = "dashed"),
++     axis.title.x = element_text(
++       size = rel(1.2),
++       face = "bold"),
++     axis.title.y = element_text(
++       size = rel(1.2),
++       face = "bold"),
++     plot.title = element_text(
++       size = 20,
++       face = "bold",
++       vjust = 1.5)
++   )
++ }
+> 
+> kClusters <- 2
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> kClusters <- 3
+> kMeans <- kmeans(imgRGB[, c("R","G")], centers=kClusters)
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+Error in rgb(kMeans$centers[kMeans$cluster, ]) : 
+  at least 3 columns needed
+> kMeans <- kmeans(imgRGB[, c("R","G","B")], centers=kClusters)
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ 
++ )
+Error: unexpected ')' in:
+"
+)"
+> kClusters <- 2
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> kClusters <- 4
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> 
+> kClusters <- 7
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> kClusters <- 9
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> 
+> kClusters <- 15
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> kClusters <- 25
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+Warning message:
+Quick-TRANSfer stage steps exceeded maximum (= 35138400) 
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> kClusters <- 31
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+Warning message:
+Quick-TRANSfer stage steps exceeded maximum (= 35138400) 
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> kClusters <- 45
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+Warning message:
+did not converge in 10 iterations 
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> kClusters <- 75
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+Warning message:
+Quick-TRANSfer stage steps exceeded maximum (= 35138400) 
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> kClusters <- 100
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+Warning message:
+Quick-TRANSfer stage steps exceeded maximum (= 35138400) 
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> 
+> kClusters <- 150
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+Warning message:
+did not converge in 10 iterations 
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> kClusters <- 200
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+Warning message:
+did not converge in 10 iterations 
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> kClusters <- 250
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+Warning message:
+did not converge in 10 iterations 
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> kClusters <- 350
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+Warning message:
+did not converge in 10 iterations 
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> kClusters <- 10
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> kClusters <- 350
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+Warning message:
+did not converge in 10 iterations 
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> kClusters <- 2
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> 
+> kClusters <- 15
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> 
+> kClusters <- 25
+> kMeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = kClusters)
+> kColors <- rgb(kMeans$centers[kMeans$cluster,])
+> ggplot(data = imgRGB, aes(x = x, y = y)) + 
++ geom_point(colour = kColors) +
++ labs(title = paste("k-Means Clustering of", kClusters, "Colors")) +
++ xlab("x") +
++ ylab("y") + 
++ plotTheme()
+> 

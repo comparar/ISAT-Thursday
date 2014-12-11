@@ -1,0 +1,279 @@
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> getMyCurrentPoints <- function(me) {
++ source_https <- function(u, unlink.tmp.certs = FALSE) {
++   require(RCurl)
++   if(!file.exists("cacert.pem")) {
++ download.file(url="http://curl.haxx.se/ca/cacert.pem", destfile = "cacert.pem")
++   }
++   script <- getURL(u, followlocation = TRUE, cainfo = "cacert.pem")
++   if(unlink.tmp.certs) unlink("cacert.pem")
++   eval(parse(text = script), envir= .GlobalEnv)
++ }
++ source_https("https://raw.githubusercontent.com/roseph/252-Redesign/master/loadPoints.R")
++ courses <- unique(df$class)
++ sc.pairs <- unique(df[,c("student","class")])
++ lookup.class <- new.env()
++ for (i in 1:nrow(sc.pairs)) {  
++    lookup.class[[ sc.pairs$student[i] ]] <- sc.pairs$class[i] 
++ }
++ me <- "comparar"
++ my.course <- which(courses==lookup.class[[me]])
++ for (s in me) {
++      my.stuff <- rbind(df[df$student=="ALL" &
++ df$class==courses[my.course],],df[df$student==s,])
++      my.points <- sum(as.integer(my.stuff$points))
++      writeLines(paste(s,"-- you currently have", my.points,
++ "points! The tasks you have completed are:"), con=stdout(), sep="\n\n")
++      print(my.stuff, quote = FALSE, row.names = FALSE)
++ }
++ for (this.course in 1:length(my.course)) {
++    current.totals <- aggregate(as.integer(df[df$class==courses[this.course],]$points), 
++ by=list(df[df$class==courses[this.course],]$student), FUN=sum)
++    writeLines(paste("Leaderboard for",courses[this.course]), con=stdout(), sep="\n")
++    print(current.totals[rev(order(current.totals$x)),], quote=FALSE, row.names=FALSE)
++ }
++    if (nrow(df[df$student=="ALL" & df$class==courses[my.course],]) > 0) {
++       current.all <- sum(as.integer(df[df$student=="ALL" & 
++ df$class==courses[my.course],]$points))
++    } else {
++       current.all <- 0
++    }
++ }
+> getMyCurrentPoints("comparar")
+Loading required package: RCurl
+Loading required package: bitops
+comparar -- you currently have 15 points! The tasks you have completed are:
+
+  student class                      activity      date points  checker
+      ALL 252.1 Data Management Plan Exercise 9/18/2014      2 radziwnm
+      ALL 252.1                  GitHub Setup  9/9/2014      1 radziwnm
+      ALL 252.1                     Install R  9/6/2014      1 radziwnm
+ comparar 252.1               Creating Images 9/30/2014      2 radziwnm
+ comparar 252.1                Data Acq 1 & 2 9/25/2014      4 radziwnm
+ comparar 252.1                 Hyperspectral 10/2/2014      2 radziwnm
+ comparar 252.1         Individual Project ++ 10/9/2014      3 radziwnm
+Leaderboard for 252.1
+  Group.1  x
+ lovingax 11
+   lee3de 11
+ larsenph 11
+ comparar 11
+ chrispzt 11
+  verdilx 10
+ somlaile 10
+ robin2eb 10
+ parkhuod 10
+ newsomtj 10
+ murph4ma 10
+ desmedce 10
+ bowlesjw 10
+ berry6cm 10
+ aguilejr 10
+ taylo2jn  9
+ augustjb  9
+ sterrejc  8
+ moralejx  8
+ bealerjm  8
+ baile2jd  8
+ merhi6js  6
+ kronlere  6
+  teetsrj  4
+  craigce  4
+      ALL  4
+ mooneytc  2
+  lyonsle  2
+ dulonggk  2
+> 
+> getMyCurrentPoints <- function(me) {
++ source_https <- function(u, unlink.tmp.certs = FALSE) {
++   require(RCurl)
++   if(!file.exists("cacert.pem")) {
++ download.file(url="http://curl.haxx.se/ca/cacert.pem", destfile = "cacert.pem")
++   }
++   script <- getURL(u, followlocation = TRUE, cainfo = "cacert.pem")
++   if(unlink.tmp.certs) unlink("cacert.pem")
++   eval(parse(text = script), envir= .GlobalEnv)
++ }
++ source_https("https://raw.githubusercontent.com/roseph/252-Redesign/master/loadPoints.R")
++ courses <- unique(df$class)
++ sc.pairs <- unique(df[,c("student","class")])
++ lookup.class <- new.env()
++ for (i in 1:nrow(sc.pairs)) {  
++    lookup.class[[ sc.pairs$student[i] ]] <- sc.pairs$class[i] 
++ }
++ my.course <- which(courses==lookup.class[[me]])
++ for(this.course in 1:length(my.course)) {
++ if (nrow(df[df$student=="ALL" & df$class==courses[my.course],]) > 0) {
++       current.all <- sum(as.integer(df[df$student=="ALL" & 
++ df$class==courses[my.course],]$points))
++    } else {
++       current.all <- 0
++    }
++ for (this.course in 1:length(my.course)) {
++    current.totals <- aggregate(as.integer(df[df$class==courses[this.course],]$points), 
++ by=list(df[df$class==courses[this.course],]$student), FUN=sum)
++    writeLines(paste("Leaderboard for",courses[this.course]), con=stdout(), sep="\n")
++    print(current.totals[rev(order(current.totals$x)),], quote=FALSE, row.names=FALSE)
++ }
++    for (s in me) {
++       my.stuff <- rbind(df[df$student=="ALL" &
++  df$class==courses[my.course],],df[df$student==s,])
++       my.points <- sum(as.integer(my.stuff$points))
++       writeLines(paste(s,"-- you currently have", my.points,
++ "points! The tasks you have completed are:"), con=stdout(), sep="\n\n")
++       print(my.stuff, quote = FALSE, row.names = FALSE)
++    }
++ }
++ }
+> getMyCurrentPoints("comparar)
+
++ > getMyCurrentPoints("comparar")
+Leaderboard for 252.1
+  Group.1  x
+ lovingax 11
+   lee3de 11
+ larsenph 11
+ comparar 11
+ chrispzt 11
+  verdilx 10
+ somlaile 10
+ robin2eb 10
+ parkhuod 10
+ newsomtj 10
+ murph4ma 10
+ desmedce 10
+ bowlesjw 10
+ berry6cm 10
+ aguilejr 10
+ taylo2jn  9
+ augustjb  9
+ sterrejc  8
+ moralejx  8
+ bealerjm  8
+ baile2jd  8
+ merhi6js  6
+ kronlere  6
+  teetsrj  4
+  craigce  4
+      ALL  4
+ mooneytc  2
+  lyonsle  2
+ dulonggk  2
+comparar -- you currently have 15 points! The tasks you have completed are:
+
+  student class                      activity      date points  checker
+      ALL 252.1 Data Management Plan Exercise 9/18/2014      2 radziwnm
+      ALL 252.1                  GitHub Setup  9/9/2014      1 radziwnm
+      ALL 252.1                     Install R  9/6/2014      1 radziwnm
+ comparar 252.1               Creating Images 9/30/2014      2 radziwnm
+ comparar 252.1                Data Acq 1 & 2 9/25/2014      4 radziwnm
+ comparar 252.1                 Hyperspectral 10/2/2014      2 radziwnm
+ comparar 252.1         Individual Project ++ 10/9/2014      3 radziwnm
+> getMyCurrentPoints()
+Error in lookup.class[[me]] : 
+  wrong arguments for subsetting an environment
+> getMyCurrentPoints
+function(me) {
+source_https <- function(u, unlink.tmp.certs = FALSE) {
+  require(RCurl)
+  if(!file.exists("cacert.pem")) {
+download.file(url="http://curl.haxx.se/ca/cacert.pem", destfile = "cacert.pem")
+  }
+  script <- getURL(u, followlocation = TRUE, cainfo = "cacert.pem")
+  if(unlink.tmp.certs) unlink("cacert.pem")
+  eval(parse(text = script), envir= .GlobalEnv)
+}
+source_https("https://raw.githubusercontent.com/roseph/252-Redesign/master/loadPoints.R")
+courses <- unique(df$class)
+sc.pairs <- unique(df[,c("student","class")])
+lookup.class <- new.env()
+for (i in 1:nrow(sc.pairs)) {  
+   lookup.class[[ sc.pairs$student[i] ]] <- sc.pairs$class[i] 
+}
+my.course <- which(courses==lookup.class[[me]])
+for(this.course in 1:length(my.course)) {
+if (nrow(df[df$student=="ALL" & df$class==courses[my.course],]) > 0) {
+      current.all <- sum(as.integer(df[df$student=="ALL" & 
+df$class==courses[my.course],]$points))
+   } else {
+      current.all <- 0
+   }
+for (this.course in 1:length(my.course)) {
+   current.totals <- aggregate(as.integer(df[df$class==courses[this.course],]$points), 
+by=list(df[df$class==courses[this.course],]$student), FUN=sum)
+   writeLines(paste("Leaderboard for",courses[this.course]), con=stdout(), sep="\n")
+   print(current.totals[rev(order(current.totals$x)),], quote=FALSE, row.names=FALSE)
+}
+   for (s in me) {
+      my.stuff <- rbind(df[df$student=="ALL" &
+ df$class==courses[my.course],],df[df$student==s,])
+      my.points <- sum(as.integer(my.stuff$points))
+      writeLines(paste(s,"-- you currently have", my.points,
+"points! The tasks you have completed are:"), con=stdout(), sep="\n\n")
+      print(my.stuff, quote = FALSE, row.names = FALSE)
+   }
+}
+}
+> getMyCurrentPoints("comparar")
+Leaderboard for 252.1
+  Group.1  x
+ lovingax 11
+   lee3de 11
+ larsenph 11
+ comparar 11
+ chrispzt 11
+  verdilx 10
+ somlaile 10
+ robin2eb 10
+ parkhuod 10
+ newsomtj 10
+ murph4ma 10
+ desmedce 10
+ bowlesjw 10
+ berry6cm 10
+ aguilejr 10
+ taylo2jn  9
+ augustjb  9
+ sterrejc  8
+ moralejx  8
+ bealerjm  8
+ baile2jd  8
+ merhi6js  6
+ kronlere  6
+  teetsrj  4
+  craigce  4
+      ALL  4
+ mooneytc  2
+  lyonsle  2
+ dulonggk  2
+comparar -- you currently have 15 points! The tasks you have completed are:
+
+  student class                      activity      date points  checker
+      ALL 252.1 Data Management Plan Exercise 9/18/2014      2 radziwnm
+      ALL 252.1                  GitHub Setup  9/9/2014      1 radziwnm
+      ALL 252.1                     Install R  9/6/2014      1 radziwnm
+ comparar 252.1               Creating Images 9/30/2014      2 radziwnm
+ comparar 252.1                Data Acq 1 & 2 9/25/2014      4 radziwnm
+ comparar 252.1                 Hyperspectral 10/2/2014      2 radziwnm
+ comparar 252.1         Individual Project ++ 10/9/2014      3 radziwnm
+> 

@@ -1,0 +1,589 @@
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> install.packages("Rfacebook","Rook","ggplot2","scales","grid","igraph")
+Warning in install.packages("Rfacebook", "Rook", "ggplot2", "scales", "grid",  :
+  'lib = "Rook"' is not writable
+Error in available[p1, dependencies, drop = FALSE] : 
+  incorrect number of dimensions
+In addition: Warning message:
+package ‘Rfacebook’ is not available (for R version 3.1.1) 
+> library(Rfacebook)
+Loading required package: httr
+Loading required package: rjson
+Warning message:
+package ‘Rfacebook’ was built under R version 3.1.2 
+> library(Rook)
+Error in library(Rook) : there is no package called ‘Rook’
+> library(ggplot2)
+> library(scales)
+> library(grid)
+> library(igraph)
+> update.packages(ask='graphics',checkBuilt=TRUE)
+--- Please select a CRAN mirror for use in this session ---
+Error in contrib.url(repos, type) : 
+  trying to use CRAN without setting a mirror
+> utils:::menuInstallPkgs()
+--- Please select a CRAN mirror for use in this session ---
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/Rook_1.1-1.zip'
+Content type 'application/zip' length 278588 bytes (272 Kb)
+opened URL
+downloaded 272 Kb
+
+package ‘Rook’ successfully unpacked and MD5 sums checked
+Warning: unable to move temporary installation ‘C:\Users\compa_000\Documents\R\win-library\3.1\file1dd0cec6af2\Rook’ to ‘C:\Users\compa_000\Documents\R\win-library\3.1\Rook’
+
+The downloaded binary packages are in
+        C:\Users\compa_000\AppData\Local\Temp\RtmpQd7Oig\downloaded_packages
+> library(Rook)
+Error in library(Rook) : there is no package called ‘Rook’
+> library("Rook")
+Error in library("Rook") : there is no package called ‘Rook’
+> library(rook)
+Error in library(rook) : there is no package called ‘rook’
+> token <- "CAACEdEose0cBAJZAP1sZACJ3gJy9r2DAfs8PSqmf3BuIjCQNRRpg0xkJPHZAjW6BCbv7m95Y20ikK3dflAU0ZCJzcvTWZCV4HRj8w9XDEjG8AvRyxUvvNhHiPECPgJExZCQy5PjwCkAMgudZCnT3j6Ehc88CpZB9Fm85I9S44rf4DZBWRbUUOvNanQjWj49WsjBXmCDey6pPvRQd7SpCCK8CriptQokHDLLUZD"
+> mat <- getNetwork(token, format="adj.matrix")
+  |                                                                              |                                                                      |   0%  |                                                                              |============                                                          |  17%  |                                                                              |=======================                                               |  33%  |                                                                              |===================================                                   |  50%  |                                                                              |===============================================                       |  67%  |                                                                              |==========================================================            |  83%  |                                                                              |======================================================================| 100%> 
+> network <- graph.adjacency(mat, mode="undirected")
+> fc <- fastgreedy.community(network)
+> membership(fc)
+Sherrill Callahan      Benton Hardy        Henry Zhou   Rachel Kronlein 
+                1                 3                 2                 1 
+     Jimmy Bowles      Jake Merhige Alexandra Freeman 
+                2                 4                 1 
+> set.seed(123)
+> 1 <- layout.fruchterman.reignold(network, niter=1000, coolexp=0.5)
+Error in 1 <- layout.fruchterman.reignold(network, niter = 1000, coolexp = 0.5) : 
+  invalid (do_set) left-hand side to assignment
+> which.max(sizes(fc))
+1 
+1 
+> sizes(fc)
+Community sizes
+1 2 3 4 
+3 2 1 1 
+> 1 <- layout.kamada.kawai(network)
+Error in 1 <- layout.kamada.kawai(network) : 
+  invalid (do_set) left-hand side to assignment
+> l <- layout.fruchterman.reignold(network, niter=1000, coolexp==0.5)
+Error: could not find function "layout.fruchterman.reignold"
+> l2 <- layout.kamada.kawai(network)
+> l <- layout.fruchterman.reingold(network, niter=1000, coolexp=0.5)
+> cl <- data.frame(name=fc$names, cluster=fc$membership, stringsAsFactors=F)
+> head(cl)
+               name cluster
+1 Sherrill Callahan       1
+2      Benton Hardy       3
+3        Henry Zhou       2
+4   Rachel Kronlein       1
+5      Jimmy Bowles       2
+6      Jake Merhige       4
+> cl <- cl[order(cl$cluster),]
+> head(cl)
+               name cluster
+1 Sherrill Callahan       1
+4   Rachel Kronlein       1
+7 Alexandra Freeman       1
+3        Henry Zhou       2
+5      Jimmy Bowles       2
+2      Benton Hardy       3
+> d <- data.frame(l); names(d) <- c("x","y")
+> d$cluster <- factor(fc$membership)
+> head(d)
+           x        y cluster
+1 -3.6911622 4.115943       1
+2  4.5123141 3.568451       3
+3  1.5977949 9.380097       2
+4  0.5713134 1.385893       1
+5  3.4952933 8.095501       2
+6 -2.9881653 8.854276       4
+> p <- ggplot(d, aes(x=x,y=y,color=cluster))
+> pg <- p + geom_point()
+> pg
+> cl <- clusters(network)
+> gc <- which(cl$membership==1)
+> mat <- mat[gc,gc]
+> network <- graph.adjacency(mat, mode="undirected")
+> fc <- fast.greedy.community(network)
+Error: could not find function "fast.greedy.community"
+> fc <- fastgreedy.community(network)
+> set.seed(123)
+> l <- layou.fruchterman.reingold(network, niter=1000, coolexp=0.5)
+Error: could not find function "layou.fruchterman.reingold"
+> l <- layout.fruchterman.reingold(network, niter=1000, coolexp=0.5)
+> d <- data.frame(l); names(d) <- c("x","y")
+> d$cluster <- factor(fc$membership)
+> edgelist <- get.edgelist(network, names=FALSE)
+> edges <- data.frame(d[edgelist[,1],c("x","y")], d[edgelist[,2],c("x","y")])
+> names(edges) <- c("x1","y1","x2","y2")
+> p <- ggplot(d, aes(x=x,y=y,color=cluster))
+> pg <- p + geom_segment(
++ aes(x=x1, y=y1, xend=x2, yend=y2),
++ data=edges,size=0.25, color="grey", alpha=1/3) + geom_point()
+> pg
+> d$degree <- degree(network)
+> which.max(degree(network))
+Alexandra Freeman 
+                3 
+> central.nodes <- lapply(communities(fc), function(x) x[which.max(d$degree[x])])
+> central.names <- fc$names[unlist(central.nodes)]
+> central.names
+[1] "Alexandra Freeman"
+> labels <- c("JMU","Cornerstone Chapel","JMU Intervarsity","Stone Bridge")
+> pg <- pg + scale_color_discrete(labels=labels)
+> p <- gggplot(d, aes(x=x, y=y, color=cluster))
+Error: could not find function "gggplot"
+> p <- ggplot(d, aes(x=x, y=y, color=cluster))
+> pq <- p + geom_segment(
++         aes(x=x1, y=y1, xend=x2, yend=y2), 
++         data=edges, size=0.25, color="white", alpha=1/3) +
++             ## note that here I add a border to the points
++         geom_point(color="grey20", aes(fill=cluster), shape=21, size=2) +
++         scale_fill_discrete(labels=labels) +
++         theme(
++             panel.background = element_rect(fill = "black"),
++             plot.background = element_rect(fill="black"),
++             axis.line = element_blank(), axis.text = element_blank(), 
++             axis.ticks = element_blank(), 
++             axis.title = element_blank(), panel.border = element_blank(), 
++             panel.grid.major = element_blank(), 
++             panel.grid.minor = element_blank(),
++             legend.background = element_rect(colour = F, fill = "black"),
++             legend.key = element_rect(fill = "black", colour = F),
++             legend.title = element_text(color="white"),
++             legend.text = element_text(color="white")
++             ) +
++ 
++ )
+Error: unexpected ')' in:
+"
+)"
+> pq <- p + geom_segment(
++         aes(x=x1, y=y1, xend=x2, yend=y2), 
++         data=edges, size=0.25, color="white", alpha=1/3) +
++             ## note that here I add a border to the points
++         geom_point(color="grey20", aes(fill=cluster), shape=21, size=2) +
++         scale_fill_discrete(labels=labels) +
++         theme(
++             panel.background = element_rect(fill = "black"),
++             plot.background = element_rect(fill="black"),
++             axis.line = element_blank(), axis.text = element_blank(), 
++             axis.ticks = element_blank(), 
++             axis.title = element_blank(), panel.border = element_blank(), 
++             panel.grid.major = element_blank(), 
++             panel.grid.minor = element_blank(),
++             legend.background = element_rect(colour = F, fill = "black"),
++             legend.key = element_rect(fill = "black", colour = F),
++             legend.title = element_text(color="white"),
++             legend.text = element_text(color="white")
++             ) +
++ 
++ pq <- p + geom_segment(
++         aes(x=x1, y=y1, xend=x2, yend=y2), 
++         data=edges, size=0.25, color="white", alpha=1/3) +
++             ## note that here I add a border to the points
++         geom_point(color="grey20", aes(fill=cluster), shape=21, size=2) +
++         scale_fill_discrete(labels=labels) +
++         theme(
++             panel.background = element_rect(fill = "black"),
++             plot.background = element_rect(fill="black"),
++             axis.line = element_blank(), axis.text = element_blank(), 
++             axis.ticks = element_blank(), 
++             axis.title = element_blank(), panel.border = element_blank(), 
++             panel.grid.major = element_blank(), 
++             panel.grid.minor = element_blank(),
++             legend.background = element_rect(colour = F, fill = "black"),
++             legend.key = element_rect(fill = "black", colour = F),
++             legend.title = element_text(color="white"),
++             legend.text = element_text(color="white")
++             ) +
++     ## changing size of points in legend
++     guides(fill = guide_legend(override.aes = list(size=5)),color="white")
+Error in p + geom_segment(aes(x = x1, y = y1, xend = x2, yend = y2), data = edges,  : 
+  could not find function "+<-"
+> pq <- p + geom_segment(
++         aes(x=x1, y=y1, xend=x2, yend=y2), 
++         data=edges, size=0.25, color="white", alpha=1/3) +
++             ## note that here I add a border to the points
++         geom_point(color="grey20", aes(fill=cluster), shape=21, size=2) +
++         scale_fill_discrete(labels=labels) +
++         theme(
++             panel.background = element_rect(fill = "black"),
++             plot.background = element_rect(fill="black"),
++             axis.line = element_blank(), axis.text = element_blank(), 
++             axis.ticks = element_blank(), 
++             axis.title = element_blank(), panel.border = element_blank(), 
++             panel.grid.major = element_blank(), 
++             panel.grid.minor = element_blank(),
++             legend.background = element_rect(colour = F, fill = "black"),
++             legend.key = element_rect(fill = "black", colour = F),
++             legend.title = element_text(color="white"),
++             legend.text = element_text(color="white")
++             ) +
++     ## changing size of points in legend
++     guides(fill = guide_legend(override.aes = list(size=5)),color="white")
+> pg
+> token <- "CAACEdEose0cBAJZAP1sZACJ3gJy9r2DAfs8PSqmf3BuIjCQNRRpg0xkJPHZAjW6BCbv7m95Y20ikK3dflAU0ZCJzcvTWZCV4HRj8w9XDEjG8AvRyxUvvNhHiPECPgJExZCQy5PjwCkAMgudZCnT3j6Ehc88CpZB9Fm85I9S44rf4DZBWRbUUOvNanQjWj49WsjBXmCDey6pPvRQd7SpCCK8CriptQokHDLLUZD"
+> mat <- getNetwork(token, format="adj.matrix")
+  |                                                                              |                                                                      |   0%  |                                                                              |=========                                                             |  12%  |                                                                              |==================                                                    |  25%  |                                                                              |==========================                                            |  38%  |                                                                              |===================================                                   |  50%  |                                                                              |============================================                          |  62%  |                                                                              |====================================================                  |  75%  |                                                                              |=============================================================         |  88%  |                                                                              |======================================================================| 100%> 
+> network <- graph.adjacency(mat, mode="undirected")
+> fc <_ fastgreedy.community(network)
+Error: unexpected input in "fc <_"
+> fc <- fastgreedy.community(network)
+> membership(fc)
+Sherrill Callahan     Tommy Newsome      Benton Hardy        Henry Zhou 
+                1                 2                 3                 2 
+  Rachel Kronlein      Jimmy Bowles          Dana Lee      Jake Merhige 
+                1                 2                 1                 4 
+Alexandra Freeman 
+                1 
+> token <- "CAACEdEose0cBAAJ0wE5j8i9udHKtUZCgMsY0DrAfNcnVT02Nthsx571EiuHknDnrgGYZAkPCyCPjVTxaHqcKM8JcoRmROEGdeGcsmW4iGOUcFZAwQPKxkuPJ8KZC1jBm3l75CHt96FZC3lGijUaxMyp2GVwk14VVYD2t9Fk2VindqdecqGZCiSQY3bz5ZAGSLXnnnVcHEhaiK8L9dzu4YhvVg64gPZB0E2oZD"
+> mat <- getNetwork(token, format="adj.matrix")
+  |                                                                              |                                                                      |   0%  |                                                                              |=========                                                             |  12%  |                                                                              |==================                                                    |  25%  |                                                                              |==========================                                            |  38%  |                                                                              |===================================                                   |  50%  |                                                                              |============================================                          |  62%  |                                                                              |====================================================                  |  75%  |                                                                              |=============================================================         |  88%  |                                                                              |======================================================================| 100%> 
+> network <- graph.adjacency(mat, mode="undirected")
+> fc <- fastgreedy.community(network)
+> membership(fc)
+Sherrill Callahan     Tommy Newsome      Benton Hardy        Henry Zhou 
+                1                 2                 3                 2 
+  Rachel Kronlein      Jimmy Bowles          Dana Lee      Jake Merhige 
+                1                 2                 1                 4 
+Alexandra Freeman 
+                1 
+> token <- "CAACEdEose0cBAAJ0wE5j8i9udHKtUZCgMsY0DrAfNcnVT02Nthsx571EiuHknDnrgGYZAkPCyCPjVTxaHqcKM8JcoRmROEGdeGcsmW4iGOUcFZAwQPKxkuPJ8KZC1jBm3l75CHt96FZC3lGijUaxMyp2GVwk14VVYD2t9Fk2VindqdecqGZCiSQY3bz5ZAGSLXnnnVcHEhaiK8L9dzu4YhvVg64gPZB0E2oZD"
+> mat <- getNetwork(token, format="adj.matrix")
+  |                                                                              |                                                                      |   0%  |                                                                              |=========                                                             |  12%  |                                                                              |==================                                                    |  25%  |                                                                              |==========================                                            |  38%  |                                                                              |===================================                                   |  50%  |                                                                              |============================================                          |  62%  |                                                                              |====================================================                  |  75%  |                                                                              |=============================================================         |  88%  |                                                                              |======================================================================| 100%> 
+> network <- graph.adjacency(mat, mode="adj.matrix")
+Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+  'arg' should be one of “directed”, “undirected”, “max”, “min”, “upper”, “lower”, “plus”
+> mat <- getNetwork(token, format="adj.matrix")
+  |                                                                              |                                                                      |   0%  |                                                                              |=========                                                             |  12%  |                                                                              |==================                                                    |  25%  |                                                                              |==========================                                            |  38%  |                                                                              |===================================                                   |  50%  |                                                                              |============================================                          |  62%  |                                                                              |====================================================                  |  75%  |                                                                              |=============================================================         |  88%  |                                                                              |======================================================================| 100%> 
+> network <- graph.adjacency(mat, mode="undirected")
+> fc <- fastgreedy.community(network)
+> membership(fc)
+Sherrill Callahan     Tommy Newsome      Benton Hardy        Henry Zhou 
+                1                 2                 3                 2 
+  Rachel Kronlein      Jimmy Bowles          Dana Lee      Jake Merhige 
+                1                 2                 1                 4 
+Alexandra Freeman 
+                1 
+> token <- "CAACEdEose0cBAAJ0wE5j8i9udHKtUZCgMsY0DrAfNcnVT02Nthsx571EiuHknDnrgGYZAkPCyCPjVTxaHqcKM8JcoRmROEGdeGcsmW4iGOUcFZAwQPKxkuPJ8KZC1jBm3l75CHt96FZC3lGijUaxMyp2GVwk14VVYD2t9Fk2VindqdecqGZCiSQY3bz5ZAGSLXnnnVcHEhaiK8L9dzu4YhvVg64gPZB0E2oZD"
+> token <- "CAACEdEose0cBAAJ0wE5j8i9udHKtUZCgMsY0DrAfNcnVT02Nthsx571EiuHknDnrgGYZAkPCyCPjVTxaHqcKM8JcoRmROEGdeGcsmW4iGOUcFZAwQPKxkuPJ8KZC1jBm3l75CHt96FZC3lGijUaxMyp2GVwk14VVYD2t9Fk2VindqdecqGZCiSQY3bz5ZAGSLXnnnVcHEhaiK8L9dzu4YhvVg64gPZB0E2oZD
++ "
+> mat <- getNetwork(token, format="adj.matrix")
+  |                                                                              |                                                                      |   0%  |                                                                              |========                                                              |  11%  |                                                                              |================                                                      |  22%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================                                       |  44%  |                                                                              |=======================================                               |  56%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================                |  78%  |                                                                              |==============================================================        |  89%  |                                                                              |======================================================================| 100%> 
+> network <- graph.adjacency(mat, mode="undirected")
+> fc <- fastgreedy.community(network)
+> membership(fc)
+Sherrill Callahan     Tommy Newsome      Benton Hardy        Henry Zhou 
+                1                 2                 3                 2 
+  Rachel Kronlein      Jimmy Bowles Justin Richardson          Dana Lee 
+                1                 2                 4                 1 
+     Jake Merhige Alexandra Freeman 
+                5                 1 
+> token <- "CAACEdEose0cBAAJ0wE5j8i9udHKtUZCgMsY0DrAfNcnVT02Nthsx571EiuHknDnrgGYZAkPCyCPjVTxaHqcKM8JcoRmROEGdeGcsmW4iGOUcFZAwQPKxkuPJ8KZC1jBm3l75CHt96FZC3lGijUaxMyp2GVwk14VVYD2t9Fk2VindqdecqGZCiSQY3bz5ZAGSLXnnnVcHEhaiK8L9dzu4YhvVg64gPZB0E2oZD"
+> mat <- getNetwork(token, format="adj.matrix")
+  |                                                                              |                                                                      |   0%  |                                                                              |========                                                              |  11%  |                                                                              |================                                                      |  22%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================                                       |  44%  |                                                                              |=======================================                               |  56%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================                |  78%  |                                                                              |==============================================================        |  89%  |                                                                              |======================================================================| 100%> 
+> network <- graph.adjacency(mat, mode="undirected")
+> fc <- fastgreedy.community(network)
+> membership(fc)
+Sherrill Callahan     Tommy Newsome      Benton Hardy        Henry Zhou 
+                1                 2                 3                 2 
+  Rachel Kronlein      Jimmy Bowles Justin Richardson          Dana Lee 
+                1                 2                 4                 1 
+     Jake Merhige Alexandra Freeman 
+                5                 1 
+> sizes(fc)
+Community sizes
+1 2 3 4 5 
+4 3 1 1 1 
+> which.max(sizes(fc))
+1 
+1 
+> set.seed(123)
+> l <- layout.fruchterman.reingold(network, niter=1000, coolexp=0.5)
+> cl <- data.frame(name = fc$names, cluster = fc$membership, stringsAsFactors=F)
+> head(cl)
+               name cluster
+1 Sherrill Callahan       1
+2     Tommy Newsome       2
+3      Benton Hardy       3
+4        Henry Zhou       2
+5   Rachel Kronlein       1
+6      Jimmy Bowles       2
+> cl <- cl[order(cl$cluster),]
+> 
+> head(cl)
+                name cluster
+1  Sherrill Callahan       1
+5    Rachel Kronlein       1
+8           Dana Lee       1
+10 Alexandra Freeman       1
+2      Tommy Newsome       2
+4         Henry Zhou       2
+> d <- data.frame(l); names(d) <- c("x", "y")
+> d$cluster <- factor(fc$membership)
+> 
+> head(d)
+          x         y cluster
+1 -22.07046  4.575366       1
+2 -17.70295 -5.241538       2
+3 -12.73110 -0.581189       3
+4 -16.27110 -7.531175       2
+5 -22.83120 -1.386573       1
+6 -19.25752 -7.545092       2
+> p <- ggplot(d, aes(x=x, y=y, color=cluster))
+> pq <- p + geom_point()
+> pq
+> large.clusters <- which(table(fc$membership)>=10)
+> fc$membership[fc$membership %in% large.clusters == FALSE] <- "Others"
+> cl <- clusters(network)
+> gc <- which(cl$membership == 1)
+> mat <- mat[gc, gc]
+> network <- graph.adjacency(mat, mode="undirected") 
+> fc <- fastgreedy.community(network) 
+> set.seed(123)
+> l <- layout.fruchterman.reingold(network, niter=1000, coolexp=0.5) 
+> l <- layout.kamada.kawai(network)
+> d <- data.frame(l); names(d) <- c("x", "y") 
+> d$cluster <- factor(fc$membership)
+> # Get the Connections (Edges)
+> edgelist <- get.edgelist(network, names=FALSE)
+> 
+> # Plot the Connections using Fruchterman-Rheingold Plotting Strategy
+> edges <- data.frame(d[edgelist[,1],c("x", "y")], d[edgelist[,2],c("x", "y")])
+> names(edges) <- c("x1", "y1", "x2", "y2")
+> p <- ggplot(d, aes(x=x, y=y, color=cluster))
+> pq <- p + geom_segment(
++         aes(x=x1, y=y1, xend=x2, yend=y2), 
++         data=edges, size=0.25, color="grey", alpha=1/3) +
++         geom_point()
+> pq
+> d$degree <- degree(network)
+> which.max(degree(network)) 
+Tommy Newsome 
+            2 
+> central.nodes <- lapply(communities(fc), function(x) x[which.max(d$degree[x])])
+> central.names <- fc$names[unlist(central.nodes)] 
+> central.names
+[1] "Dana Lee"      "Tommy Newsome"
+> labels <- c("JMU
++ ", "InterVarsity","SCA","PEER","NHS","SBHS")
+> pg <- pg + scale_color_discrete(labels=labels)
+Scale for 'colour' is already present. Adding another scale for 'colour', which will replace the existing scale.
+> p <- ggplot(d, aes(x=x, y=y, color=cluster))
+> pq <- p + geom_segment(
++         aes(x=x1, y=y1, xend=x2, yend=y2), 
++         data=edges, size=0.25, color="white", alpha=1/3) +
++             ## note that here I add a border to the points
++         geom_point(color="grey20", aes(fill=cluster), shape=21, size=2) +
++         scale_fill_discrete(labels=labels) +
++         theme(
++             panel.background = element_rect(fill = "black"),
++             plot.background = element_rect(fill="black"),
++             axis.line = element_blank(), axis.text = element_blank(), 
++             axis.ticks = element_blank(), 
++             axis.title = element_blank(), panel.border = element_blank(), 
++             panel.grid.major = element_blank(), 
++             panel.grid.minor = element_blank(),
++             legend.background = element_rect(colour = F, fill = "black"),
++             legend.key = element_rect(fill = "black", colour = F),
++             legend.title = element_text(color="white"),
++             legend.text = element_text(color="white")
++             ) +
++     ## changing size of points in legend
++     guides(fill = guide_legend(override.aes = list(size=5)),color="white")
+> pq
+> pqpq <- p + geom_segment(
++         aes(x=x1, y=y1, xend=x2, yend=y2), 
++         data=edges, size=0.25, color="white", alpha=1/3) +
++             ## note that here I add a border to the points
++         geom_point(color="grey20", aes(fill=cluster), shape=21, size=2) +
++         scale_fill_discrete(labels=labels) +
++         theme(
++             panel.background = element_rect(fill = "black"),
++             plot.background = element_rect(fill="black"),
++             axis.line = element_blank(), axis.text = element_blank(), 
++             axis.ticks = element_blank(), 
++             axis.title = element_blank(), panel.border = element_blank(), 
++             panel.grid.major = element_blank(), 
++             panel.grid.minor = element_blank(),
++             legend.background = element_rect(colour = F, fill = "black"),
++             legend.key = element_rect(fill = "black", colour = F),
++             legend.title = element_text(color="white"),
++             legend.text = element_text(color="white")
++             ) +
++     ## changing size of points in legend
++     guides(fill = guide_legend(override.aes = list(size=5)),color="white")
+> pq
+> 
+> pq <- pq + scale_color_discrete(labels=labels)
+> p <- ggplot(d, aes(x=x, y=y, color=cluster))
+> pq <- p + geom_segment(
++         aes(x=x1, y=y1, xend=x2, yend=y2), 
++         data=edges, size=0.25, color="white", alpha=1/3) +
++             ## note that here I add a border to the points
++         geom_point(color="grey20", aes(fill=cluster), shape=21, size=2) +
++         scale_fill_discrete(labels=labels) +
++         theme(
++             panel.background = element_rect(fill = "black"),
++             plot.background = element_rect(fill="black"),
++             axis.line = element_blank(), axis.text = element_blank(), 
++             axis.ticks = element_blank(), 
++             axis.title = element_blank(), panel.border = element_blank(), 
++             panel.grid.major = element_blank(), 
++             panel.grid.minor = element_blank(),
++             legend.background = element_rect(colour = F, fill = "black"),
++             legend.key = element_rect(fill = "black", colour = F),
++             legend.title = element_text(color="white"),
++             legend.text = element_text(color="white")
++             ) +
++     ## changing size of points in legend
++     guides(fill = guide_legend(override.aes = list(size=5)),color="white")
+> pq
+> pq <- p + geom_segment(
++         aes(x=x1, y=y1, xend=x2, yend=y2), 
++         data=edges, size=0.25, color="white", alpha=1/3) +
++             ## note that here I add a border to the points
++         geom_point(color="grey20", aes(fill=cluster), shape=21, size=2) +
++         scale_fill_discrete(labels=labels) +
++         theme(
++             panel.background = element_rect(fill = "black"),
++             plot.background = element_rect(fill="black"),
++             axis.line = element_blank(), axis.text = element_blank(), 
++             axis.ticks = element_blank(), 
++             axis.title = element_blank(), panel.border = element_blank(), 
++             panel.grid.major = element_blank(), 
++             panel.grid.minor = element_blank(),
++             legend.background = element_rect(colour = F, fill = "black"),
++             legend.key = element_rect(fill = "black", colour = F),
++             legend.title = element_text(color="white"),
++             legend.text = element_text(color="white")
++             ) +
++     ## changing size of points in legend
++     guides(fill = guide_legend(override.aes = list(size=5)),color="white")
+> pq
+> token <- "CAACEdEose0cBAHeUTmf1WHoc6O6WAbRKcQHyiRUjgi0JtjpYt4rOGqwLOB8OvhjgaADgKeuMYPUYDQdzh1WhOPqhozziJTcJE3xaXRZBhLK0ne2vhy0ZC3G2hL5MNqd4SS5yLa4ge5XZCFcum2QFDAZBd2bl8N9qL9alagH1eEqZBkauMvhZAsLNfzC06BhDOBJREURPZAlc5iidatAAnncWsF0ndynwxEZD"
+> mat <- getNetwork(token, format="adj.matrix")
+  |                                                                              |                                                                      |   0%  |                                                                              |========                                                              |  11%  |                                                                              |================                                                      |  22%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================                                       |  44%  |                                                                              |=======================================                               |  56%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================                |  78%  |                                                                              |==============================================================        |  89%  |                                                                              |======================================================================| 100%> 
+> network <- graph.adjacency(mat, mode="undirected")
+> fc <- fastgreedy.community(network)
+> membership(fc)
+Sherrill Callahan     Tommy Newsome      Benton Hardy        Henry Zhou 
+                1                 2                 4                 2 
+  Rachel Kronlein      Jimmy Bowles Justin Richardson          Dana Lee 
+                1                 2                 3                 3 
+     Jake Merhige Alexandra Freeman 
+                5                 1 
+> set.seed(123)
+> l <- layout.fruchterman.reingold(network, niter=1000, coolexp=0.5)
+> 
+> cl <- data.frame(name = fc$names, cluster = fc$membership, stringsAsFactors=F)
+> head(cl)
+               name cluster
+1 Sherrill Callahan       1
+2     Tommy Newsome       2
+3      Benton Hardy       4
+4        Henry Zhou       2
+5   Rachel Kronlein       1
+6      Jimmy Bowles       2
+> cl <- cl[order(cl$cluster),]
+> head(cl)
+                name cluster
+1  Sherrill Callahan       1
+5    Rachel Kronlein       1
+10 Alexandra Freeman       1
+2      Tommy Newsome       2
+4         Henry Zhou       2
+6       Jimmy Bowles       2
+> d <- data.frame(l); names(d) <- c("x", "y")
+> d$cluster <- factor(fc$membership)
+>  head(d)
+           x         y cluster
+1  8.4631279 15.289165       1
+2 -0.9993090  8.227514       2
+3  3.4225202 18.579425       4
+4 -3.3963979 10.521858       2
+5  6.4461137  9.424218       1
+6 -0.2362328 10.737857       2
+> p <- ggplot(d, aes(x=x, y=y, color=cluster))
+> pq <- p + geom_point()
+> pq
+> p <- ggplot(d, aes(x=x, y=y, color=cluster))
+> pq <- p + geom_point()
+> pq
+> large.clusters <- which(table(fc$membership)>=10)
+> fc$membership[fc$membership %in% large.clusters == FALSE] <- "Others"
+> cl <- clusters(network)
+> gc <- which(cl$membership == 1)
+> mat <- mat[gc, gc]
+> network <- graph.adjacency(mat, mode="undirected") 
+> fc <- fastgreedy.community(network) 
+> set.seed(123)
+> l <- layout.fruchterman.reingold(network, niter=1000, coolexp=0.5) 
+> l <- layout.kamada.kawai(network)
+> d <- data.frame(l); names(d) <- c("x", "y") 
+> d$cluster <- factor(fc$membership)
+> # Get the Connections (Edges)
+> edgelist <- get.edgelist(network, names=FALSE)
+> 
+> # Plot the Connections using Fruchterman-Rheingold Plotting Strategy
+> edges <- data.frame(d[edgelist[,1],c("x", "y")], d[edgelist[,2],c("x", "y")])
+> names(edges) <- c("x1", "y1", "x2", "y2")
+> p <- ggplot(d, aes(x=x, y=y, color=cluster))
+> pq <- p + geom_segment(
++         aes(x=x1, y=y1, xend=x2, yend=y2), 
++         data=edges, size=0.25, color="grey", alpha=1/3) +
++         geom_point()
+> pq
+> d$degree <- degree(network)
+> which.max(degree(network)) 
+Dana Lee 
+       7 
+> central.nodes <- lapply(communities(fc), function(x) x[which.max(d$degree[x])])
+> central.names <- fc$names[unlist(central.nodes)] 
+> central.names
+[1] "Rachel Kronlein" "Tommy Newsome"   "Dana Lee"       
+> labels <- c("JMU","InterVaristy","ISAT UseR!")
+> pq <- pq + scale_color_discrete(labels=labels)
+> pq <- p + geom_segment(
++         aes(x=x1, y=y1, xend=x2, yend=y2), 
++         data=edges, size=0.25, color="white", alpha=1/3) +
++             ## note that here I add a border to the points
++         geom_point(color="grey20", aes(fill=cluster), shape=21, size=2) +
++         scale_fill_discrete(labels=labels) +
++         theme(
++             panel.background = element_rect(fill = "black"),
++             plot.background = element_rect(fill="black"),
++             axis.line = element_blank(), axis.text = element_blank(), 
++             axis.ticks = element_blank(), 
++             axis.title = element_blank(), panel.border = element_blank(), 
++             panel.grid.major = element_blank(), 
++             panel.grid.minor = element_blank(),
++             legend.background = element_rect(colour = F, fill = "black"),
++             legend.key = element_rect(fill = "black", colour = F),
++             legend.title = element_text(color="white"),
++             legend.text = element_text(color="white")
++             ) +
++     ## changing size of points in legend
++     guides(fill = guide_legend(override.aes = list(size=5)),color="white")
+> pq
+> 
+> 

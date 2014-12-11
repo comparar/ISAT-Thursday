@@ -1,0 +1,191 @@
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> getwd()
+[1] "C:/Users/compa_000/Documents"
+> setwd("ISAT 252")
+> dir()
+[1] "Acquiring Data Notes.doc"                           
+[2] "contract.csv"                                       
+[3] "Good Morning Structure"                             
+[4] "Ice Cream Survey (Responses) - Form Responses 1.csv"
+[5] "Ice Cream Survey.csv"                               
+[6] "UCBAdmissions.csv"                                  
+> ice cream <- read.csv("Ice Cream Survey.csv")
+Error: unexpected symbol in "ice cream"
+> temp <- read.csv("Ice Cream Survey.csv")
+> head(temp)
+       Timestamp What.is.your.favorite.flavor.of.ice.cream.
+1 9/9/2014 12:07                                  Chocolate
+2 9/9/2014 12:07                          Cookies and Cream
+3 9/9/2014 12:07                                  Chocolate
+4 9/9/2014 12:08                                   Vanilla 
+5 9/9/2014 12:09                               Cookie Dough
+6 9/9/2014 12:11                                    Vanilla
+> str(temp)
+'data.frame':   26 obs. of  2 variables:
+ $ Timestamp                                 : Factor w/ 24 levels "9/10/2014 13:42",..: 5 5 5 6 7 8 9 10 11 12 ...
+ $ What.is.your.favorite.flavor.of.ice.cream.: Factor w/ 7 levels "Chocolate","Cookie Dough",..: 1 3 1 7 2 6 6 2 4 4 ...
+> aggregate(Timestamp~What.is.your.favorite.flavor.of.ice.cream., data=temp, FUN=list)
+  What.is.your.favorite.flavor.of.ice.cream.                       Timestamp
+1                                  Chocolate                        5, 5, 14
+2                               Cookie Dough           7, 10, 13, 15, 16, 21
+3                          Cookies and Cream                               5
+4                        Mint Chocolate Chip 11, 12, 18, 20, 22, 24, 1, 2, 4
+5                          Peanut Butter Cup                       19, 23, 3
+6                                    Vanilla                        8, 9, 17
+7                                   Vanilla                                6
+> json.file <- "http://api.wunderground.com/api/6c38a7df0f4063fc/conditions/q/VA/Harrisonburg.json"
+> json.data <- fromJSON(paste(readLines(json.file), collapse=""))
+Error: could not find function "fromJSON"
+> library("rjson")
+> json.data <- fromJSON(paste(readLines(json.file), collapse=""))
+> str(json.data)
+List of 2
+ $ response           :List of 3
+  ..$ version       : chr "0.1"
+  ..$ termsofService: chr "http://www.wunderground.com/weather/api/d/terms.html"
+  ..$ features      :List of 1
+  .. ..$ conditions: num 1
+ $ current_observation:List of 56
+  ..$ image                  :List of 3
+  .. ..$ url  : chr "http://icons.wxug.com/graphics/wu2/logo_130x80.png"
+  .. ..$ title: chr "Weather Underground"
+  .. ..$ link : chr "http://www.wunderground.com"
+  ..$ display_location       :List of 12
+  .. ..$ full           : chr "Harrisonburg, VA"
+  .. ..$ city           : chr "Harrisonburg"
+  .. ..$ state          : chr "VA"
+  .. ..$ state_name     : chr "Virginia"
+  .. ..$ country        : chr "US"
+  .. ..$ country_iso3166: chr "US"
+  .. ..$ zip            : chr "22801"
+  .. ..$ magic          : chr "1"
+  .. ..$ wmo            : chr "99999"
+  .. ..$ latitude       : chr "38.44248581"
+  .. ..$ longitude      : chr "-78.87306213"
+  .. ..$ elevation      : chr "397.00000000"
+  ..$ observation_location   :List of 8
+  .. ..$ full           : chr "HFD - Station 4, Harrisonburg, Virginia"
+  .. ..$ city           : chr "HFD - Station 4, Harrisonburg"
+  .. ..$ state          : chr "Virginia"
+  .. ..$ country        : chr "US"
+  .. ..$ country_iso3166: chr "US"
+  .. ..$ latitude       : chr "38.452480"
+  .. ..$ longitude      : chr "-78.864632"
+  .. ..$ elevation      : chr "1348 ft"
+  ..$ estimated              : list()
+  ..$ station_id             : chr "KVAHARRI23"
+  ..$ observation_time       : chr "Last Updated on September 18, 11:50 AM EDT"
+  ..$ observation_time_rfc822: chr "Thu, 18 Sep 2014 11:50:08 -0400"
+  ..$ observation_epoch      : chr "1411055408"
+  ..$ local_time_rfc822      : chr "Thu, 18 Sep 2014 11:50:18 -0400"
+  ..$ local_epoch            : chr "1411055418"
+  ..$ local_tz_short         : chr "EDT"
+  ..$ local_tz_long          : chr "America/New_York"
+  ..$ local_tz_offset        : chr "-0400"
+  ..$ weather                : chr "Partly Cloudy"
+  ..$ temperature_string     : chr "70.2 F (21.2 C)"
+  ..$ temp_f                 : num 70.2
+  ..$ temp_c                 : num 21.2
+  ..$ relative_humidity      : chr "59%"
+  ..$ wind_string            : chr "From the East at 4.9 MPH Gusting to 7.0 MPH"
+  ..$ wind_dir               : chr "East"
+  ..$ wind_degrees           : num 89
+  ..$ wind_mph               : num 4.9
+  ..$ wind_gust_mph          : chr "7.0"
+  ..$ wind_kph               : num 7.9
+  ..$ wind_gust_kph          : chr "11.3"
+  ..$ pressure_mb            : chr "1018"
+  ..$ pressure_in            : chr "30.05"
+  ..$ pressure_trend         : chr "+"
+  ..$ dewpoint_string        : chr "55 F (13 C)"
+  ..$ dewpoint_f             : num 55
+  ..$ dewpoint_c             : num 13
+  ..$ heat_index_string      : chr "NA"
+  ..$ heat_index_f           : chr "NA"
+  ..$ heat_index_c           : chr "NA"
+  ..$ windchill_string       : chr "NA"
+  ..$ windchill_f            : chr "NA"
+  ..$ windchill_c            : chr "NA"
+  ..$ feelslike_string       : chr "70.2 F (21.2 C)"
+  ..$ feelslike_f            : chr "70.2"
+  ..$ feelslike_c            : chr "21.2"
+  ..$ visibility_mi          : chr "10.0"
+  ..$ visibility_km          : chr "16.1"
+  ..$ solarradiation         : chr "--"
+  ..$ UV                     : chr "7"
+  ..$ precip_1hr_string      : chr "0.00 in ( 0 mm)"
+  ..$ precip_1hr_in          : chr "0.00"
+  ..$ precip_1hr_metric      : chr " 0"
+  ..$ precip_today_string    : chr "0.00 in (0 mm)"
+  ..$ precip_today_in        : chr "0.00"
+  ..$ precip_today_metric    : chr "0"
+  ..$ icon                   : chr "partlycloudy"
+  ..$ icon_url               : chr "http://icons.wxug.com/i/c/k/partlycloudy.gif"
+  ..$ forecast_url           : chr "http://www.wunderground.com/US/VA/Harrisonburg.html"
+  ..$ history_url            : chr "http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID=KVAHARRI23"
+  ..$ ob_url                 : chr "http://www.wunderground.com/cgi-bin/findweather/getForecast?query=38.452480,-78.864632"
+  ..$ nowcast                : chr ""
+> setwd("Desktop")
+Error in setwd("Desktop") : cannot change working directory
+> getwd()
+[1] "C:/Users/compa_000/Documents/ISAT 252"
+> setwd("Documents")
+Error in setwd("Documents") : cannot change working directory
+> setwd(..)
+Error in setwd(..) : object '..' not found
+> getwd()
+[1] "C:/Users/compa_000/Documents/ISAT 252"
+> getwd()
+[1] "C:/Users/compa_000/Documents/ISAT 252"
+> dir()
+[1] "Acquiring Data Notes.doc"                           
+[2] "contract.csv"                                       
+[3] "Good Morning Structure"                             
+[4] "Ice Cream Survey (Responses) - Form Responses 1.csv"
+[5] "Ice Cream Survey.csv"                               
+[6] "shadenorm.R"                                        
+[7] "UCBAdmissions.csv"                                  
+> func <- read.R("shadenorm.R")
+Error: could not find function "read.R"
+> getwd()
+[1] "C:/Users/compa_000/Documents/ISAT 252"
+> dir()
+[1] "Acquiring Data Notes.doc"                           
+[2] "contract.csv"                                       
+[3] "Good Morning Structure"                             
+[4] "Ice Cream Survey (Responses) - Form Responses 1.csv"
+[5] "Ice Cream Survey.csv"                               
+[6] "shadenorm.R"                                        
+[7] "UCBAdmissions.csv"                                  
+> source("shadenorm.R")
+> shadenorm()
+> shadenorm(0.5)
+> shadenorm()
+> shadenorm(between)
+Error in ifelse(is.null(below), qnorm(pcts[1], mu, sig), below) : 
+  object 'between' not found
+> shadenorm()
+> shadenorm(2,.2)
+> shadenorm(0,-2)
+> shadenorm()
+> 

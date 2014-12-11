@@ -1,0 +1,128 @@
+> 
+
+> json.data <- fromJSON(paste(readLines(json.file), collapse="")
++ )
+> str(json.data)
+List of 2
+ $ response           :List of 3
+  ..$ version       : chr "0.1"
+  ..$ termsofService: chr "http://www.wunderground.com/weather/api/d/terms.html"
+  ..$ features      :List of 1
+  .. ..$ conditions: num 1
+ $ current_observation:List of 56
+  ..$ image                  :List of 3
+  .. ..$ url  : chr "http://icons.wxug.com/graphics/wu2/logo_130x80.png"
+  .. ..$ title: chr "Weather Underground"
+  .. ..$ link : chr "http://www.wunderground.com"
+  ..$ display_location       :List of 12
+  .. ..$ full           : chr "San Francisco, CA"
+  .. ..$ city           : chr "San Francisco"
+  .. ..$ state          : chr "CA"
+  .. ..$ state_name     : chr "California"
+  .. ..$ country        : chr "US"
+  .. ..$ country_iso3166: chr "US"
+  .. ..$ zip            : chr "94101"
+  .. ..$ magic          : chr "1"
+  .. ..$ wmo            : chr "99999"
+  .. ..$ latitude       : chr "37.77500916"
+  .. ..$ longitude      : chr "-122.41825867"
+  .. ..$ elevation      : chr "47.00000000"
+  ..$ observation_location   :List of 8
+  .. ..$ full           : chr "SOMA - Near Van Ness, San Francisco, California"
+  .. ..$ city           : chr "SOMA - Near Van Ness, San Francisco"
+  .. ..$ state          : chr "California"
+  .. ..$ country        : chr "US"
+  .. ..$ country_iso3166: chr "US"
+  .. ..$ latitude       : chr "37.773285"
+  .. ..$ longitude      : chr "-122.417725"
+  .. ..$ elevation      : chr "49 ft"
+  ..$ estimated              : list()
+  ..$ station_id             : chr "KCASANFR58"
+  ..$ observation_time       : chr "Last Updated on September 18, 8:34 AM PDT"
+  ..$ observation_time_rfc822: chr "Thu, 18 Sep 2014 08:34:18 -0700"
+  ..$ observation_epoch      : chr "1411054458"
+  ..$ local_time_rfc822      : chr "Thu, 18 Sep 2014 08:34:45 -0700"
+  ..$ local_epoch            : chr "1411054485"
+  ..$ local_tz_short         : chr "PDT"
+  ..$ local_tz_long          : chr "America/Los_Angeles"
+  ..$ local_tz_offset        : chr "-0700"
+  ..$ weather                : chr "Overcast"
+  ..$ temperature_string     : chr "70.9 F (21.6 C)"
+  ..$ temp_f                 : num 70.9
+  ..$ temp_c                 : num 21.6
+  ..$ relative_humidity      : chr "85%"
+  ..$ wind_string            : chr "Calm"
+  ..$ wind_dir               : chr "NNE"
+  ..$ wind_degrees           : num 33
+  ..$ wind_mph               : num 0
+  ..$ wind_gust_mph          : num 0
+  ..$ wind_kph               : num 0
+  ..$ wind_gust_kph          : num 0
+  ..$ pressure_mb            : chr "1010"
+  ..$ pressure_in            : chr "29.84"
+  ..$ pressure_trend         : chr "+"
+  ..$ dewpoint_string        : chr "66 F (19 C)"
+  ..$ dewpoint_f             : num 66
+  ..$ dewpoint_c             : num 19
+  ..$ heat_index_string      : chr "NA"
+  ..$ heat_index_f           : chr "NA"
+  ..$ heat_index_c           : chr "NA"
+  ..$ windchill_string       : chr "NA"
+  ..$ windchill_f            : chr "NA"
+  ..$ windchill_c            : chr "NA"
+  ..$ feelslike_string       : chr "70.9 F (21.6 C)"
+  ..$ feelslike_f            : chr "70.9"
+  ..$ feelslike_c            : chr "21.6"
+  ..$ visibility_mi          : chr "10.0"
+  ..$ visibility_km          : chr "16.1"
+  ..$ solarradiation         : chr "--"
+  ..$ UV                     : chr "0"
+  ..$ precip_1hr_string      : chr "0.00 in ( 0 mm)"
+  ..$ precip_1hr_in          : chr "0.00"
+  ..$ precip_1hr_metric      : chr " 0"
+  ..$ precip_today_string    : chr "0.05 in (1 mm)"
+  ..$ precip_today_in        : chr "0.05"
+  ..$ precip_today_metric    : chr "1"
+  ..$ icon                   : chr "cloudy"
+  ..$ icon_url               : chr "http://icons.wxug.com/i/c/k/cloudy.gif"
+  ..$ forecast_url           : chr "http://www.wunderground.com/US/CA/San_Francisco.html"
+  ..$ history_url            : chr "http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID=KCASANFR58"
+  ..$ ob_url                 : chr "http://www.wunderground.com/cgi-bin/findweather/getForecast?query=37.773285,-122.417725"
+  ..$ nowcast                : chr ""
+> json.data$current_observation$display_location$latitude
+[1] "37.77500916"
+> is.numeric(json.data$current_observation$display_location$latitude)
+[1] FALSE
+> is.character(json.data$current_observation$display_location$latitude)
+[1] TRUE
+> json.data$current_observation$observation_time
+[1] "Last Updated on September 18, 8:34 AM PDT"
+> is.character(json.data$current_observation$temperature_string)
+[1] TRUE
+> json.data$current_observation$temperature_string
+[1] "70.9 F (21.6 C)"
+> is.character(json.data$current_observation$temperature_string)
+[1] TRUE
+> json.data$current_observation$temp_f
+[1] 70.9
+> is.character(json.data$current_observation$temp_f)
+[1] FALSE
+> is.numeric(json.data$current_observation$temp_f)
+[1] TRUE
+> obs.location <- rep(NA,length(json.data$current_observation$observation_location))
+> for (n in 1:length(json.data$current_observation$observation_location)) {
++ obs.location[n] <- json.data$current_observation$observation_location [[n]]
++ }
+> obs.location
+[1] "SOMA - Near Van Ness, San Francisco, California"
+[2] "SOMA - Near Van Ness, San Francisco"            
+[3] "California"                                     
+[4] "US"                                             
+[5] "US"                                             
+[6] "37.773285"                                      
+[7] "-122.417725"                                    
+[8] "49 ft"                                          
+> obs.location[8]
+[1] "49 ft"
+> save.image("C:\\Users\\compa_000\\SkyDrive\\Documents\\2014-2015\\Fall 2014\\ISAT 252\\Wunderground San Francisco")
+>

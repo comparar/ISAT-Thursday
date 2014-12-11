@@ -1,0 +1,133 @@
+#Facebook Analysis	Allison Comparin
+#Facebook Access Token:  https://developers.facebook.com/tools/explorer?method=GET&path=me%3Ffields%3Did%2Cname&version=v2.1
+#Tutorial:  http://thinktostart.com/analyzing-facebook-with-r/
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> install.packages(Rfacebook)
+Error in install.packages(Rfacebook) : object 'Rfacebook' not found
+> install.packages("Rfacebook")
+Installing package into ‘C:/Users/compa_000/Documents/R/win-library/3.1’
+(as ‘lib’ is unspecified)
+--- Please select a CRAN mirror for use in this session ---
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/Rfacebook_0.4.zip'
+Content type 'application/zip' length 56717 bytes (55 Kb)
+opened URL
+downloaded 55 Kb
+
+package ‘Rfacebook’ successfully unpacked and MD5 sums checked
+
+
+The downloaded binary packages are in
+        C:\Users\compa_000\AppData\Local\Temp\RtmpqcKYiI\downloaded_packages
+> library(Rfacebook)
+Loading required package: httr
+Loading required package: rjson
+> library(httr)
+> library(rjson)
+> install.packages("Rook")
+Installing package into ‘C:/Users/compa_000/Documents/R/win-library/3.1’
+(as ‘lib’ is unspecified)
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/Rook_1.0-9.zip'
+Content type 'application/zip' length 274851 bytes (268 Kb)
+opened URL
+downloaded 268 Kb
+
+package ‘Rook’ successfully unpacked and MD5 sums checked
+Warning: unable to move temporary installation ‘C:\Users\compa_000\Documents\R\win-library\3.1\file154c58b021e8\Rook’ to ‘C:\Users\compa_000\Documents\R\win-library\3.1\Rook’
+
+The downloaded binary packages are in
+        C:\Users\compa_000\AppData\Local\Temp\RtmpqcKYiI\downloaded_packages
+
+ token <- "CAACEdEose0cBAJ5DHLP0gbZB9W9rfYZACq8ZA2cHpiZBH5BzHytV787ZCbVDMS3VvzbD9RuPZCZAAqwZBDWoNVMZCRp27UmB6RLJgFjUxMX1MLsn6jBMbnJw9aFjg4aGRldd1qIeI6ug7ZByaNCZCFtP9TPPzwfZAwkmqyIgecQYyyjUVe55oCriIZBLtfCpW80aSp5kAZBH2LXfehxQO8rUTyNbZAMtDpRWNg8Fs4ZD"
+> me <- getUsers("me", token=token)
+> getFriends(token, simplify=FALSE)
+                 id              name username first_name last_name gender
+1 10153205272803625 Sherrill Callahan       NA   Sherrill  Callahan female
+2        1107165057      Benton Hardy       NA     Benton     Hardy   male
+3        1514626488        Henry Zhou       NA      Henry      Zhou   male
+  locale category likes
+1  en_US       NA    NA
+2  en_US       NA    NA
+3  en_US       NA    NA
+                                                                                                                                                                                                                           picture
+1 https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/p200x200/10653637_10153173021693625_1999045707312666253_n.jpg?oh=06ec7db2435859e39779fdc9565935ca&oe=54F726D3&__gda__=1421410882_d71fbe4972655458a616f6c0cffe2134
+2  https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/p200x200/1897809_10203260071598384_3989808256162217381_n.jpg?oh=5294dddc979bbcef1a09284d596bcff4&oe=54CB00F4&__gda__=1420974070_368f2e1006dc878f8e8c4cdc57335013
+3 https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/s200x200/10154017_10203727120527897_4555129116439368200_n.jpg?oh=99563dad32023edbd86d797cdea43134&oe=54B91994&__gda__=1422768108_86a30f15b0320c43dbef2f7a458d0514
+    birthday             location             hometown relationship_status
+1      12/25                 <NA>                 <NA>   In a relationship
+2 10/05/1994   Leesburg, Virginia Apex, North Carolina   In a relationship
+3      10/31 Chesapeake, Virginia                 <NA>                <NA>
+> my_friends <- getFriends(token, simplify=FALSE)
+> head(my_friends, n=10)
+                 id              name username first_name last_name gender
+1 10153205272803625 Sherrill Callahan       NA   Sherrill  Callahan female
+2        1107165057      Benton Hardy       NA     Benton     Hardy   male
+3        1514626488        Henry Zhou       NA      Henry      Zhou   male
+  locale category likes
+1  en_US       NA    NA
+2  en_US       NA    NA
+3  en_US       NA    NA
+                                                                                                                                                                                                                           picture
+1 https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/p200x200/10653637_10153173021693625_1999045707312666253_n.jpg?oh=06ec7db2435859e39779fdc9565935ca&oe=54F726D3&__gda__=1421410882_d71fbe4972655458a616f6c0cffe2134
+2  https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/p200x200/1897809_10203260071598384_3989808256162217381_n.jpg?oh=5294dddc979bbcef1a09284d596bcff4&oe=54CB00F4&__gda__=1420974070_368f2e1006dc878f8e8c4cdc57335013
+3 https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/s200x200/10154017_10203727120527897_4555129116439368200_n.jpg?oh=99563dad32023edbd86d797cdea43134&oe=54B91994&__gda__=1422768108_86a30f15b0320c43dbef2f7a458d0514
+    birthday             location             hometown relationship_status
+1      12/25                 <NA>                 <NA>   In a relationship
+2 10/05/1994   Leesburg, Virginia Apex, North Carolina   In a relationship
+3      10/31 Chesapeake, Virginia                 <NA>                <NA>
+> my_friends_info <- getUsers(myfriends$id, token=token, private_info=TRUE)
+Error in getUsers(myfriends$id, token = token, private_info = TRUE) : 
+  object 'myfriends' not found
+> my_friends_info <- getUsers(my_friends$id, token=token, private_info=TRUE)
+> table(my_friends_info$relationship_status)
+
+In a relationship 
+                2 
+> friends <- facebook(path="me/friends", token=token)
+Error: could not find function "facebook"
+> friends <- Rfacebook(path="me/friends", token=token)
+Error: could not find function "Rfacebook"
+> pie(table(my_friends_info$education_history),col=rainbow)
+Error in rep_len(col, nx) : attempt to replicate non-vector
+> str(my_friends)
+'data.frame':   3 obs. of  14 variables:
+ $ id                 : chr  "10153205272803625" "1107165057" "1514626488"
+ $ name               : chr  "Sherrill Callahan" "Benton Hardy" "Henry Zhou"
+ $ username           : logi  NA NA NA
+ $ first_name         : chr  "Sherrill" "Benton" "Henry"
+ $ last_name          : chr  "Callahan" "Hardy" "Zhou"
+ $ gender             : chr  "female" "male" "male"
+ $ locale             : chr  "en_US" "en_US" "en_US"
+ $ category           : logi  NA NA NA
+ $ likes              : logi  NA NA NA
+ $ picture            : chr  "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/p200x200/10653637_10153173021693625_1999045707312666253_n.jpg?oh"| __truncated__ "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/p200x200/1897809_10203260071598384_3989808256162217381_n.jpg?oh="| __truncated__ "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/s200x200/10154017_10203727120527897_4555129116439368200_n.jpg?oh"| __truncated__
+ $ birthday           : chr  "12/25" "10/05/1994" "10/31"
+ $ location           : chr  NA "Leesburg, Virginia" "Chesapeake, Virginia"
+ $ hometown           : chr  NA "Apex, North Carolina" NA
+ $ relationship_status: chr  "In a relationship" "In a relationship" NA
+> table(my_friends$location)
+
+Chesapeake, Virginia   Leesburg, Virginia 
+                   1                    1 
+
+> colors <- c("coral","darkslategray1")
+> barplot(loc, main="Location", xlab="Location",ylab="Frequency",col=colors)
+

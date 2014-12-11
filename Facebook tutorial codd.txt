@@ -1,0 +1,21 @@
+Facebook Visual Networks Code
+
+install.packages("Rfacebook","Rook","scales","ggplot2","grid","igraph")
+library(Rfacebook)
+library(Rook)
+library(scales)
+library(ggplot2)
+library(grid)
+library(igraph)
+
+token <- "CAACEdEose0cBADvuS6zMs6YKsNKlnutZBnQoDLkbMViCT9ZCyuhGIOz1OFDtlIuZCV0j1lY5RKtiBkleZArb6yJ0oZBvqm0RkgqzqyC5PZCPZAwVTJKXSiB0WBk6ti7ZBdIgZC8XYoC7UD1ajpaIWCeFR0naLvZB5Myj12JhgGOcdfePEfS9yvEwVatJLijmCzqANu33YSoTR43OnEDJiextw7GJbsapLZA3f8ZD"
+mat <- getNetwork(token,format="adj.matrix")
+
+network <- graph.adjacency(mat, mode="undirected")
+fc <- fastgreedy.community(network)
+set.seed(123)
+l <- layout.kamada.kawai(network)
+cl <- data.frame(name=fc$names,cluster=fc$membership, stringsAsFactors=F
+cl <- cl[order(cl$cluster),]
+
+d <- data.frame(1); names
